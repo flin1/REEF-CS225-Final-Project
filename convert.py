@@ -40,4 +40,3 @@ def convert_routes_csv():
     df_routes.drop('Codeshare', axis = 1, inplace = True)
     # convert dataframe to CSV titled 'routes.csv'
     df_routes.to_csv('routes.csv', index = False)
-convert_routes_csv()

@@ -13,11 +13,11 @@ BFS::~BFS() {
 }
 
 //add dest to source's adjacency_list
-void BFSGraph::addEdge(int source, int destination) {
+void BFS::addEdge(int source, int destination) {
   adjacency_list[source].push_back(destination);
 }
 
-std::vector<std::string> BFSGraph::BFS(int startVertex, string airport_file, string route_file) { 
+std::vector<std::string> BFS::BFS(int startVertex, string airport_file, string route_file) { 
    graph g();
     std::vector<Vertex> vec = g.getVertices();
     std::vector<std::string> result;

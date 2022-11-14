@@ -2,12 +2,6 @@
 #include <unordered_set>
 using namespace std;
 
-struct AirportNode {
-    int id;
-    int cost;
-    vector<AirportNode> neighbors;
-};
-
 /**
  * Dijkstra's Shortest Path Algorithm
  * This function finds the shortest path from the 1st airport to the 2nd airport.
@@ -16,7 +10,7 @@ vector<int> Graph::Dijkstra(int origin_airport_id, int destination_airport_id) {
     vector<double> distances(nodes_.size(), INFINITY);
     distances[origin_airport_id] = 0;
     map<int, int> previous;
-    bool visited[nodes_.size()];
+    vector<bool> visited(nodes_.size(), false);
     AirportNode start;
     for (AirportNode node : nodes_) {
         if (node.id == origin_airport_id) {

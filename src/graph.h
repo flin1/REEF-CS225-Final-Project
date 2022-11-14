@@ -7,6 +7,14 @@
 #include <queue>
 // #include <algorithm>
 
+struct AirportNode {
+    int id;
+    std::string name;
+    std::string city;
+    std::string country;
+    double longitude;
+    double latitude;
+};
 
 class Graph
 {

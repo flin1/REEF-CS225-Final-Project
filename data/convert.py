@@ -10,7 +10,7 @@ def convert_airports_csv():
     df_airports.columns = ['Airport ID', 'Name', 'City', 'Country', 'IATA', 'ICAO',
         'Latitude', 'Longitude', 'Altitude', 'Timezone', 'DST',
         'TZ Database Time Zone', 'Type', 'Source']
-    # drop unneeded columns (source, timezon, DST, TZ database time zone, type)
+    # drop unneeded columns (source, timezone, DST, TZ database time zone, type)
     df_airports.drop('IATA', axis = 1, inplace = True)
     df_airports.drop('ICAO', axis = 1, inplace = True)
     df_airports.drop('Altitude', axis = 1, inplace = True)

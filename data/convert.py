@@ -42,6 +42,4 @@ def convert_routes_csv():
     print(df_routes)
     # convert dataframe to CSV titled 'routes.csv'
     df_routes.to_csv('routes.csv', index = False)
-
-convert_airports_csv()
-convert_routes_csv()
+    

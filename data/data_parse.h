@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <map>
 
 class processCSV {
     struct AirportNode {
@@ -31,9 +32,14 @@ class processCSV {
     // create vector of structs that fill in the information acquired by the fileToVector function
     void createRoute(std::vector<std::string> & data);
 
+    void createAdjList(std::vector<AirportNode> & allNodes, std::vector<Route> & allEdges);
+    
     private: 
         std::vector<AirportNode> allNodes;
         std::vector<Route> allEdges;
+        std::map<int, AirportNode> airportIdMap; //airport id and corresponding airportnode
+        std::map<int, std::vector<std::pair<AirportNode,double>>> adjList; // airport id, adj vector
+
 };
 
 

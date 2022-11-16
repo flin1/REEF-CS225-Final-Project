@@ -3,7 +3,7 @@
 // takes in a file name to be opened with fstream
 // returns vector of vector of strings that store the CSV info with each line being an index in the vector
 // and each word contained within a vector for that line
-std::vector<std::string> processCSV::fileToVector (std::string & filename){
+std::vector<std::string> processCSV::fileToVector (std::string & filename) {
     std::ifstream input;
     input.open(filename);
     std::string line;
@@ -38,6 +38,7 @@ void processCSV::createAirportNode(std::vector<std::string> & data) {
         airport.longitude = std::stod(airportComponents[4]);
         airport.latitude = std::stod(airportComponents[5]);
         nodes.push_back(airport);
+        airportIdMap.insert(std::pair<int, struct AirportNode>(airport.id, airport));
     }
     allNodes = nodes;
 }
@@ -59,11 +60,31 @@ void processCSV::createRoute(std::vector<std::string> & data) {
         route.id = std::stoi(routeComponents[0]);
         route.sourceID = std::stoi(routeComponents[1]); 
         route.destinationID = std::stoi(routeComponents[2]);
-        // uses Haversine formula from G4G 
-        // divide the values of longitude and latitude of both the points by 180/pi. 
-        // The value of pi is 22/7. The value of 180/pi is approximately 57.29577951. 
-        // If we want to calculate the distance between two places in miles, use the value 3,963, which is the radius of Earth.
+        // add distance (pythagorean theorem)
         edges.push_back(route);
     }
     allEdges = edges;
+}
+
+void processCSV::createAdjList(std::vector<struct AirportNode> & allNodes, std::vector<struct Route> & allEdges) {
+    // pre load adjList with keys and empty vectors
+    // set every key in adjList to be an airportNode
+    for (AirportNode airport : allNodes) {
+        std::vector<std::pair<AirportNode,double>> airportVect;
+        std::pair<int,std::vector<std::pair<AirportNode,double>>> pair (airport.id, airportVect); // airport id, adj vector
+        adjList.insert(pair);
+    }
+
+    // traverse vector of edges 
+    for (int i = 0; i < allEdges.size(); i++) {
+
+        // get destination node based on ID 
+        AirportNode destination = airportIdMap[allEdges[i].destinationID];
+
+        // find vector in adjList that corresponds to the source airport
+        std::vector<std::pair<AirportNode,double>> neighbors = adjList[allEdges[i].sourceID];
+        // add destination node to the vector of the source airport
+        std::pair<AirportNode, double> pair (destination, allEdges[i].distance);
+        neighbors.push_back(pair);
+    }
 }

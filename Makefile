@@ -47,6 +47,11 @@ data_parse.o: src/data_parse.cpp
 	$(CC) $(CFLAGS) -c src/data_parse.cpp
 
 graph.o: src/graph.cpp
+
+data_parse.o: src/data_parse.cpp
+	$(CC) $(CFLAGS) -c src/data_parse.cpp
+
+graph.o: src/graph.h src/graph.cpp
 	$(CC) $(CFLAGS) -c src/graph.cpp
 
 clean:

@@ -88,3 +88,8 @@ TEST_CASE("CreateAdjListGraph", "[dataparse]") {
 }
 
 
+
+int main() {
+    std::cout << "test file" << std::endl;
+    // return 0;
+}

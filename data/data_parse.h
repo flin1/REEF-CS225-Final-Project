@@ -3,6 +3,7 @@
 #include <vector>
 #include <sstream>
 #include <map>
+#include <math.h>
 
 class processCSV {
     struct AirportNode {

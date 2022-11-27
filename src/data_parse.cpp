@@ -35,8 +35,8 @@ void processCSV::createAirportNode(std::vector<std::string> & data) {
         airport.name = airportComponents[1]; 
         airport.city = airportComponents[2];
         airport.country = airportComponents[3];
-        airport.longitude = std::stod(airportComponents[4]);
-        airport.latitude = std::stod(airportComponents[5]);
+        airport.latitude = std::stod(airportComponents[4]);
+        airport.longitude = std::stod(airportComponents[5]); 
         nodes.push_back(airport);
         airportIdMap.insert(std::pair<int, struct AirportNode>(airport.id, airport));
     }
@@ -60,7 +60,7 @@ void processCSV::createRoute(std::vector<std::string> & data) {
         route.id = std::stoi(routeComponents[0]);
         route.sourceID = std::stoi(routeComponents[1]); 
         route.destinationID = std::stoi(routeComponents[2]);
-        // add distance (pythagorean theorem) (long1-long2)^2 + (lat1-lat2)^2
+        // add distance (pythagorean theorem) --> (long1-long2)^2 + (lat1-lat2)^2
         AirportNode source = airportIdMap[route.sourceID];
         AirportNode dest = airportIdMap[route.destinationID];
         double sourceLong = source.longitude;

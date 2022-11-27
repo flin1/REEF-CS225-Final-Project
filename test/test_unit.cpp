@@ -33,8 +33,10 @@ TEST_CASE("ParseInAirportNodes", "[dataparse]") {
     REQUIRE(tester_nodes[1].city == "Zhangjiakou");
     REQUIRE(tester_nodes[1].country == "China");
     REQUIRE(tester_nodes[1].id == 10940);
-    // REQUIRE(tester_nodes[1].latitude == 40.7386016846);
-    // REQUIRE(tester_nodes[1].longitude == 114.930000305);
+    // Fix latitude/longitude
+    REQUIRE(tester_nodes[1].latitude == 40.7386016846);
+    REQUIRE(tester_nodes[1].longitude == 114.930000305);
+    //
     REQUIRE(tester_nodes[1].name == "Zhangjiakou Ningyuan Airport");
 }
 
@@ -51,12 +53,36 @@ TEST_CASE("ParseInAirportRoutes", "[dataparse]") {
 
     p.createRoute(tester_data);
     auto tester_edges = p.getEdges();
-    REQUIRE(tester_edges[1].destinationID == 10942);
+    // sourceID and destinationID are in positions 0 and 1. What about id??
+    REQUIRE(tester_edges[1].id == ???);
     REQUIRE(tester_edges[1].sourceID == 10941);
-    REQUIRE(tester_edges[1].id == 10940);
-    // REQUIRE(tester_nodes[1].latitude == 40.7386016846);
-    // REQUIRE(tester_nodes[1].longitude == 114.930000305);
-    REQUIRE(tester_edges[1].name == "Zhangjiakou Ningyuan Airport");
+    REQUIRE(tester_edges[1].destinationID == 10942);
+    REQUIRE(tester_edges[1].distance == 21.66630);
+    // 
+    
+}
+
+TEST_CASE("CreateAdjListGraph", "[dataparse]") {
+    processCSV p;
+    string filename1 = "test/dummyairports.csv";
+    vector<string> tester_data_airport = p.fileToVector(filename1);
+    p.createAirportNode(tester_data_airport);
+    auto tester_nodes = p.getNodes();
+
+    string filename2 = "test/dummyroutes.csv";
+    vector<string> tester_data_routes = p.fileToVector(filename2);
+    p.createRoute(tester_data_routes);
+    auto tester_edges = p.getEdges();
+    // segfault -> likely in data_parse.cpp line 94 because distance doesn't exist
+    p.createAdjList(tester_nodes, tester_edges);
+
+    auto test_graph = p.getGraph();
+    auto node10951_neighbor1 = test_graph.at(10951)[0];
+    REQUIRE(node10951_neighbor1.first.id == 10949);
+    REQUIRE(node10951_neighbor1.second == 84.82608277);
+    auto node10951_neighbor2 = test_graph.at(10951)[1];
+    REQUIRE(node10951_neighbor1.first.id == 10952);
+    REQUIRE(node10951_neighbor1.second == 2.279480569);
 }
 
 

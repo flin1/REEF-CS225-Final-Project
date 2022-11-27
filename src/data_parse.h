@@ -37,6 +37,7 @@ class processCSV {
 
     std::vector<AirportNode> getNodes() {return allNodes;};
     std::vector<Route> getEdges() {return allEdges;};
+    std::map<int, std::vector<std::pair<AirportNode,double>>> getGraph() {return adjList;};
     
     private: 
         std::vector<AirportNode> allNodes;

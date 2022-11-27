@@ -27,14 +27,18 @@
 # 	rm *.o output
 
 
-CC = g++
-CFLAGS = -Wall -g -w
+CC = clang++
+CFLAGS = -Wall -g -w -std=c++1y -c
+LDFLAGS = -std=c++1y -stdlib=libc++ -lc++abi
 
 main: src/main.o src/data_parse.o src/graph.o
 	$(CC) $(CFLAGS) -o main src/main.o src/data_parse.o src/graph.o
 
-tests: test/test_unit.o src/data_parse.o src/graph.o
-	$(CC) $(CFLAGS) -o tests test/test_unit.o src/data_parse.o src/graph.o
+tests: test_unit.o data_parse.o
+	$(CC) test_unit.o data_parse.o $(LDFLAGS) -o tests
+
+test_unit.o : test/test_unit.cpp test/catch/catch.hpp
+	$(CC) $(CFLAGS) test/test_unit.cpp
 
 data_parse.o: src/data_parse.h src/data_parse.cpp
 	$(CC) $(CFLAGS) -c src/data_parse.cpp

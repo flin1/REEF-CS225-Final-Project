@@ -3,7 +3,7 @@
 // takes in a file name to be opened with fstream
 // returns vector of vector of strings that store the CSV info with each line being an index in the vector
 // and each word contained within a vector for that line
-std::vector<std::string> processCSV::fileToVector (std::string & filename) {
+std::vector<std::string> processCSV::fileToVector(std::string & filename) {
     std::ifstream input;
     input.open(filename);
     std::string line;
@@ -83,7 +83,7 @@ void processCSV::createAdjList(std::vector<struct AirportNode> & allNodes, std::
     }
 
     // traverse vector of edges 
-    for (int i = 0; i < allEdges.size(); i++) {
+    for (unsigned i = 0; i < allEdges.size(); i++) {
 
         // get destination node based on ID 
         AirportNode destination = airportIdMap[allEdges[i].destinationID];

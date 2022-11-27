@@ -37,6 +37,7 @@ main: main.o data_parse.o graph.o
 main.o: src/main.cpp
 	$(CC) $(CFLAGS) src/main.cpp
 
+
 tests: test_unit.o data_parse.o
 	$(CC) test_unit.o data_parse.o $(LDFLAGS) -o tests
 

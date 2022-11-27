@@ -54,7 +54,7 @@ TEST_CASE("ParseInAirportRoutes", "[dataparse]") {
     p.createRoute(tester_data);
     auto tester_edges = p.getEdges();
     // sourceID and destinationID are in positions 0 and 1. What about id??
-    REQUIRE(tester_edges[1].id == ???);
+    // REQUIRE(tester_edges[1].id == ???);
     REQUIRE(tester_edges[1].sourceID == 10941);
     REQUIRE(tester_edges[1].destinationID == 10942);
     REQUIRE(tester_edges[1].distance == 21.66630);

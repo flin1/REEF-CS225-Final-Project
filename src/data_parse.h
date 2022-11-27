@@ -34,6 +34,9 @@ class processCSV {
     void createRoute(std::vector<std::string> & data);
 
     void createAdjList(std::vector<AirportNode> & allNodes, std::vector<Route> & allEdges);
+
+    std::vector<AirportNode> getNodes() {return allNodes;};
+    std::vector<Route> getEdges() {return allEdges;};
     
     private: 
         std::vector<AirportNode> allNodes;

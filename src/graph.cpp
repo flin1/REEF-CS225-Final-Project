@@ -1,31 +1,128 @@
 #include "graph.h"
-
+#include <unordered_set>
 using namespace std;
-//Dijkstra's Shortest Path Algorithm
-vector<string> Graph::Dijkstra(string origin_airport, string destination_airport) {
-    vector<int> distances(nodes_.size());
-    map<string, string> previous;
-    priority_queue<int> priorityQueue;
-    bool visited[nodes_.size()];
 
-    while (priority_queue.top())
+// int main() {
+//     return 0;
+// }
+
+/**
+ * Dijkstra's Shortest Path Algorithm
+ * This function finds the shortest path from the 1st airport to the 2nd airport.
+ */
+vector<int> Graph::Dijkstra(int origin_airport_id, int destination_airport_id) {
+    // vector<double> distances(nodes_.size(), INFINITY);
+    // distances[origin_airport_id] = 0;
+    // map<int, int> previous;
+    // vector<bool> visited(nodes_.size(), false);
+    // AirportNode start;
+    // for (AirportNode node : nodes_) {
+    //     if (node.id == origin_airport_id) {
+    //         start = node;
+    //         break;
+    //     }
+    // }
+
+    // priority_queue<pair<double,AirportNode>, vector<pair<double,AirportNode> >, greater<double> > priorityQueue;
+    // priorityQueue.push({0,start});
+
+    // while (priorityQueue.top().second.id != destination_airport_id) {
+    //     AirportNode current_airport = priorityQueue.top().second;
+    //     priorityQueue.pop();
+    //     for (AirportNode neighbor : current_airport.neighbors) {
+    //         if (visited[neighbor.id] == false) {
+    //             double neighbor_cost = distances[current_airport.id] + neighbor.cost;
+    //             if (neighbor_cost < distances[neighbor.id]) {
+    //                 distances[neighbor.id] = neighbor_cost;
+    //                 priorityQueue.push({neighbor_cost, neighbor});
+    //                 auto itr = previous.find(neighbor.id);
+    //                 if (itr != previous.end()) {
+    //                     itr->second = current_airport.id;
+    //                 } else {
+    //                     previous.insert({neighbor.id, current_airport.id});
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     visited[current_airport.id] = true;
+    // }
+
+    // int backtrace_id = destination_airport_id;
+    vector<int> path;
+    // while (backtrace_id != origin_airport_id) {
+    //     path.push_back(backtrace_id);
+    //     backtrace_id = previous[backtrace_id];
+    // }
+
+    // reverse(path.begin(), path.end());
+    return path;
 }
-// Dijkstra(Graph, source, destination):
 
-//   initialize distances  // initialize tentative distance value
-//   initialize previous   // initialize a map that maps current node -> its previous node
-//   initialize priority_queue   // initialize the priority queue
-//   initialize visited
 
-//   while the top of priority_queue is not destination:
-//       get the current_node from priority_queue
-//       for neighbor in current_node's neighbors and not in visited:
-//           if update its neighbor's distances:
-//               previous[neighbor] = current_node
-//       save current_node into visited
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * A star Shortest Path Algorithm
+ * This function finds the shortest path from the 1st airport to the 2nd airport.
+ * Also accounts for a heuristic--Euclidean distance to end node--when choosing the best next node
+ */
+// vector<int> Graph::AStar(int origin_airport_id, int destination_airport_id) {
+    // vector<double> distances(nodes_.size(), INFINITY);
+    // distances[origin_airport_id] = 0;
+    // map<int, int> previous;
+    // vector<bool> visited(nodes_.size(), false);
+    // AirportNode start;
+    // for (AirportNode node : nodes_) {
+    //     if (node.id == origin_airport_id) {
+    //         start = node;
+    //         break;
+    //     }
+    // }
+
+    // priority_queue<pair<double,AirportNode>, vector<pair<double,AirportNode> >, greater<double> > priorityQueue;
+    // priorityQueue.push({0,start});
+
+    // while (priorityQueue.top().second.id != destination_airport_id) {
+    //     AirportNode current_airport = priorityQueue.top().second;
+    //     priorityQueue.pop();
+    //     for (AirportNode neighbor : current_airport.neighbors) {
+    //         if (visited[neighbor.id] == false) {
+    //             // Double check to see if it's correctly including decimals
+    //             double heuristic = sqrt(pow(current_airport.latitude - neighbor.latitude,2) + pow(current_airport.longitude - neighbor.longitude,2));
+    //             double neighbor_cost = distances[current_airport.id] + neighbor.cost + heuristic;
+    //             if (neighbor_cost < distances[neighbor.id]) {
+    //                 distances[neighbor.id] = neighbor_cost;
+    //                 priorityQueue.push({neighbor_cost, neighbor});
+    //                 auto itr = previous.find(neighbor.id);
+    //                 if (itr != previous.end()) {
+    //                     itr->second = current_airport.id;
+    //                 } else {
+    //                     previous.insert({neighbor.id, current_airport.id});
+    //                 }
+    //             }
+    //         }
+    //     }
+
+    //     visited[current_airport.id] = true;
+    // }
+
+    // int backtrace_id = destination_airport_id;
+    // vector<int> path;
+    // while (backtrace_id != origin_airport_id) {
+    //     path.push_back(backtrace_id);
+    //     backtrace_id = previous[backtrace_id];
+    // }
 
 //   extract path from previous
 //   return path and distance
-
-
-#hi

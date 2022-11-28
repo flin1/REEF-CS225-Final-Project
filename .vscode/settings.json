@@ -71,6 +71,16 @@
         "utility": "cpp",
         "fstream": "cpp",
         "iomanip": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "unordered_set": "cpp",
+        "numeric": "cpp",
+        "random": "cpp",
+        "regex": "cpp",
+        "set": "cpp",
+        "__availability": "cpp",
+        "__memory": "cpp",
+        "filesystem": "cpp",
+        "memory_resource": "cpp",
+        "__functional_03": "cpp"
     }
 }

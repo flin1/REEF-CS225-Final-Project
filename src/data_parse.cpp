@@ -57,9 +57,8 @@ void processCSV::createRoute(std::vector<std::string> & data) {
             routeComponents.push_back(out);
         }
         // set route for each value in the vector
-        route.id = std::stoi(routeComponents[0]);
-        route.sourceID = std::stoi(routeComponents[1]); 
-        route.destinationID = std::stoi(routeComponents[2]);
+        route.sourceID = std::stoi(routeComponents[0]); 
+        route.destinationID = std::stoi(routeComponents[1]);
         // add distance (pythagorean theorem) --> (long1-long2)^2 + (lat1-lat2)^2
         AirportNode source = airportIdMap[route.sourceID];
         AirportNode dest = airportIdMap[route.destinationID];

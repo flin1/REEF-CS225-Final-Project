@@ -16,7 +16,6 @@ class processCSV {
     };
 
     struct Route {
-        int id;
         int sourceID;
         int destinationID;
         double distance;

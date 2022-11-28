@@ -35,8 +35,8 @@ void processCSV::createAirportNode(std::vector<std::string> & data) {
         airport.name = airportComponents[1]; 
         airport.city = airportComponents[2];
         airport.country = airportComponents[3];
-        airport.longitude = std::stod(airportComponents[4]);
-        airport.latitude = std::stod(airportComponents[5]);
+        airport.latitude = std::stod(airportComponents[4]);
+        airport.longitude = std::stod(airportComponents[5]);
         nodes.push_back(airport);
         airportIdMap.insert(std::pair<int, struct AirportNode>(airport.id, airport));
     }
@@ -57,9 +57,8 @@ void processCSV::createRoute(std::vector<std::string> & data) {
             routeComponents.push_back(out);
         }
         // set route for each value in the vector
-        route.id = std::stoi(routeComponents[0]);
-        route.sourceID = std::stoi(routeComponents[1]); 
-        route.destinationID = std::stoi(routeComponents[2]);
+        route.sourceID = std::stoi(routeComponents[0]); 
+        route.destinationID = std::stoi(routeComponents[1]);
         // add distance (pythagorean theorem) (long1-long2)^2 + (lat1-lat2)^2
         AirportNode source = airportIdMap[route.sourceID];
         AirportNode dest = airportIdMap[route.destinationID];
@@ -81,15 +80,13 @@ void processCSV::createAdjList(std::vector<struct AirportNode> & allNodes, std::
         std::pair<int,std::vector<std::pair<AirportNode,double>>> pair (airport.id, airportVect); // airport id, adj vector
         adjList.insert(pair);
     }
-
     // traverse vector of edges 
     for (unsigned i = 0; i < allEdges.size(); i++) {
-
         // get destination node based on ID 
         AirportNode destination = airportIdMap[allEdges[i].destinationID];
 
         // find vector in adjList that corresponds to the source airport
-        std::vector<std::pair<AirportNode,double>> neighbors = adjList[allEdges[i].sourceID];
+        std::vector<std::pair<AirportNode,double>> & neighbors = adjList[allEdges[i].sourceID];
         // add destination node to the vector of the source airport
         std::pair<AirportNode, double> pair (destination, allEdges[i].distance);
         neighbors.push_back(pair);

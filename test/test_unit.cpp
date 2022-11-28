@@ -33,15 +33,19 @@ TEST_CASE("ParseInAirportNodes", "[dataparse]") {
     REQUIRE(tester_nodes[1].city == "Zhangjiakou");
     REQUIRE(tester_nodes[1].country == "China");
     REQUIRE(tester_nodes[1].id == 10940);
-    // Fix latitude/longitude
     REQUIRE(tester_nodes[1].latitude == 40.7386016846);
     REQUIRE(tester_nodes[1].longitude == 114.930000305);
-    //
     REQUIRE(tester_nodes[1].name == "Zhangjiakou Ningyuan Airport");
+
 }
 
 TEST_CASE("ParseInAirportRoutes", "[dataparse]") {
     processCSV p;
+
+    string filename1 = "test/dummyairports.csv";
+    vector<string> tester_data_airport = p.fileToVector(filename1);
+    p.createAirportNode(tester_data_airport);
+
     string filename = "test/dummyroutes.csv"; // path should be from EXECUTABLE (so where "tests" is--currently in main directory)
     vector<string> tester_data = p.fileToVector(filename);
     vector<string> ans =
@@ -53,13 +57,10 @@ TEST_CASE("ParseInAirportRoutes", "[dataparse]") {
 
     p.createRoute(tester_data);
     auto tester_edges = p.getEdges();
-    // sourceID and destinationID are in positions 0 and 1. What about id??
-    // REQUIRE(tester_edges[1].id == ???);
     REQUIRE(tester_edges[1].sourceID == 10941);
     REQUIRE(tester_edges[1].destinationID == 10942);
-    REQUIRE(tester_edges[1].distance == 21.66630);
-    // 
-    
+    REQUIRE(std::abs(tester_edges[1].distance - 469.4285829148) < 0.001);
+
 }
 
 TEST_CASE("CreateAdjListGraph", "[dataparse]") {
@@ -79,10 +80,11 @@ TEST_CASE("CreateAdjListGraph", "[dataparse]") {
     auto test_graph = p.getGraph();
     auto node10951_neighbor1 = test_graph.at(10951)[0];
     REQUIRE(node10951_neighbor1.first.id == 10949);
-    REQUIRE(node10951_neighbor1.second == 84.82608277);
+    REQUIRE(std::abs(node10951_neighbor1.second - 7195.4643184578) < 0.001);
     auto node10951_neighbor2 = test_graph.at(10951)[1];
-    REQUIRE(node10951_neighbor1.first.id == 10952);
-    REQUIRE(node10951_neighbor1.second == 2.279480569);
+    REQUIRE(node10951_neighbor2.first.id == 10952);
+    REQUIRE(std::abs(node10951_neighbor2.second - 5.1960316645) < 0.001);
+
 }
 
 

@@ -31,8 +31,11 @@ CC = clang++
 CFLAGS = -Wall -g -w -std=c++1y -c
 LDFLAGS = -std=c++1y -stdlib=libc++ -lc++abi
 
-main: src/main.o src/data_parse.o src/graph.o
-	$(CC) $(CFLAGS) -o main src/main.o src/data_parse.o src/graph.o
+main: main.o data_parse.o graph.o
+	$(CC) main.o $(LDFLAGS) -o main
+
+main.o: src/main.cpp
+	$(CC) $(CFLAGS) src/main.cpp
 
 tests: test_unit.o data_parse.o
 	$(CC) test_unit.o data_parse.o $(LDFLAGS) -o tests
@@ -40,10 +43,10 @@ tests: test_unit.o data_parse.o
 test_unit.o : test/test_unit.cpp test/catch/catch.hpp
 	$(CC) $(CFLAGS) test/test_unit.cpp
 
-data_parse.o: src/data_parse.h src/data_parse.cpp
+data_parse.o: src/data_parse.cpp
 	$(CC) $(CFLAGS) -c src/data_parse.cpp
 
-graph.o: src/graph.h src/graph.cpp
+graph.o: src/graph.cpp
 	$(CC) $(CFLAGS) -c src/graph.cpp
 
 clean:

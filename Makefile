@@ -32,7 +32,7 @@ CFLAGS = -Wall -g -w -std=c++1y -c
 LDFLAGS = -std=c++1y -stdlib=libc++ -lc++abi
 
 main: main.o data_parse.o graph.o
-	$(CC) main.o $(LDFLAGS) -o main
+	$(CC) main.o data_parse.o graph.o $(LDFLAGS) -o main
 
 main.o: src/main.cpp
 	$(CC) $(CFLAGS) src/main.cpp

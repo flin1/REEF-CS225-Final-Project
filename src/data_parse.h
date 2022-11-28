@@ -36,13 +36,13 @@ class processCSV {
 
     std::vector<AirportNode> getNodes() {return allNodes;};
     std::vector<Route> getEdges() {return allEdges;};
-    std::map<int, std::vector<std::pair<AirportNode,double>>> getGraph() {return adjList;};
+    std::map<int, std::vector<std::pair<AirportNode,double> > > getGraph() {return adjList;};
     
     private: 
         std::vector<AirportNode> allNodes;
         std::vector<Route> allEdges;
         std::map<int, AirportNode> airportIdMap; //airport id and corresponding airportnode
-        std::map<int, std::vector<std::pair<AirportNode,double>>> adjList; // airport id, adj vector
+        std::map<int, std::vector<std::pair<AirportNode,double> > > adjList; // airport id, adj vector
 
 };
 

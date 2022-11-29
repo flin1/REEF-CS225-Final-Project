@@ -11,12 +11,11 @@ class processCSV {
         std::string name;
         std::string city;
         std::string country;
-        double longitude;
         double latitude;
+        double longitude;
     };
 
     struct Route {
-        int id;
         int sourceID;
         int destinationID;
         double distance;

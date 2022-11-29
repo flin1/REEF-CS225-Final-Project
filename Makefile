@@ -38,16 +38,11 @@ main.o: src/main.cpp
 	$(CC) $(CFLAGS) src/main.cpp
 
 
-tests: test_unit.o data_parse.o
-	$(CC) test_unit.o data_parse.o $(LDFLAGS) -o tests
+tests: test_unit.o data_parse.o graph.o
+	$(CC) test_unit.o data_parse.o graph.o $(LDFLAGS) -o tests
 
 test_unit.o : test/test_unit.cpp test/catch/catch.hpp
 	$(CC) $(CFLAGS) test/test_unit.cpp
-
-data_parse.o: src/data_parse.cpp
-	$(CC) $(CFLAGS) -c src/data_parse.cpp
-
-graph.o: src/graph.cpp
 
 data_parse.o: src/data_parse.cpp
 	$(CC) $(CFLAGS) -c src/data_parse.cpp

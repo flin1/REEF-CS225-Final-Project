@@ -6,7 +6,7 @@
 #include <math.h>
 
 class processCSV {
-    struct AirportNode {
+    public : struct AirportNode {
         int id;
         std::string name;
         std::string city;

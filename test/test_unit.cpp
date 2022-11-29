@@ -2,7 +2,7 @@
 #include <iostream>
 
 #include "../src/data_parse.h"
-// #include "../src/graph.h"
+#include "../src/graph.h"
 #include "./catch/catch.hpp"
 
 using namespace std;
@@ -51,6 +51,7 @@ TEST_CASE("ParseInAirportRoutes", "[dataparse]") {
     vector<string> ans =
     { "10939,10940,0",
     "10941,10942,0",
+    "10942,11004,0",
     "10951,10949,0",
     "10951,10952,0" };
     REQUIRE(tester_data == ans);
@@ -84,5 +85,29 @@ TEST_CASE("CreateAdjListGraph", "[dataparse]") {
     auto node10951_neighbor2 = test_graph.at(10951)[1];
     REQUIRE(node10951_neighbor2.first.id == 10952);
     REQUIRE(std::abs(node10951_neighbor2.second - 5.1960316645) < 0.001);
+
+}
+
+
+TEST_CASE("Dijkstras", "[traversal]") {
+    processCSV p;
+    string filename1 = "test/dummyairports.csv";
+    vector<string> tester_data_airport = p.fileToVector(filename1);
+    p.createAirportNode(tester_data_airport);
+    auto tester_nodes = p.getNodes();
+
+    string filename2 = "test/dummyroutes.csv";
+    vector<string> tester_data_routes = p.fileToVector(filename2);
+    p.createRoute(tester_data_routes);
+    auto tester_edges = p.getEdges();
+
+    p.createAdjList(tester_nodes, tester_edges);
+    auto graph = p.getGraph();
+
+    vector<int> shortest_path = Dijkstra(graph, 10941, 11004, tester_nodes);
+
+    REQUIRE(shortest_path[0] == 10941);
+    REQUIRE(shortest_path[1] == 10942);
+    REQUIRE(shortest_path[2] == 11004);
 
 }

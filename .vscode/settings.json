@@ -81,6 +81,7 @@
         "__memory": "cpp",
         "filesystem": "cpp",
         "memory_resource": "cpp",
-        "__functional_03": "cpp"
+        "__functional_03": "cpp",
+        "list": "cpp"
     }
 }

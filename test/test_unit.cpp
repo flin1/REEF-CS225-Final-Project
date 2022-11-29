@@ -86,17 +86,3 @@ TEST_CASE("CreateAdjListGraph", "[dataparse]") {
     REQUIRE(std::abs(node10951_neighbor2.second - 5.1960316645) < 0.001);
 
 }
-
-
-
-    p.createRoute(tester_data);
-    auto tester_edges = p.getEdges();
-    REQUIRE(tester_edges[1].destinationID == 10942);
-    REQUIRE(tester_edges[1].sourceID == 10941);
-    REQUIRE(tester_edges[1].id == 10940);
-    // REQUIRE(tester_nodes[1].latitude == 40.7386016846);
-    // REQUIRE(tester_nodes[1].longitude == 114.930000305);
-    REQUIRE(tester_edges[1].name == "Zhangjiakou Ningyuan Airport");
-}
-
-

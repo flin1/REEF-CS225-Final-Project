@@ -29,7 +29,7 @@ The results.md file is located in the main directory alongside the README.md.
 All code is located in the src directory:
 - The convert.py file cleans the data and removes unnecessary/bad data using python pandas
 - The data_parse.h and data_parse.cpp files create a processCSV class to go through the .csv files and converts them to c++ nodes and edges. These nodes and edges are then organized in the form of an adjacency list to be used by the BFS and shortest path algoritms
-- The graph.h and graph.cpp files hold the Djikstra's and A star algorithms used to find the shortest path between any given set of two airports. 
+- The graph.h and graph.cpp files hold the Dijkstra's and A star algorithms used to find the shortest path between any given set of two airports. 
 - The BFS.h and BFS.cpp files store the BFS traversal algorithm to traverse through all the nodes within our graph.
 
 
@@ -44,7 +44,7 @@ Test cases for this codebase are located within the tests directory and can be f
 - file reading
 - data conversion into node and edges
 - organization into an adjacency list
-- djikstra's algorithm functionality
+- Dijkstra's algorithm functionality
 - BFS traversal functionality
 - A star algorithm functionality
 

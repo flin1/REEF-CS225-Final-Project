@@ -75,7 +75,6 @@ TEST_CASE("CreateAdjListGraph", "[dataparse]") {
     vector<string> tester_data_routes = p.fileToVector(filename2);
     p.createRoute(tester_data_routes);
     auto tester_edges = p.getEdges();
-    // segfault -> likely in data_parse.cpp line 94 because distance doesn't exist
     p.createAdjList(tester_nodes, tester_edges);
 
     auto test_graph = p.getGraph();

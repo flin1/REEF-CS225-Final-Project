@@ -17,7 +17,6 @@ https://docs.google.com/document/d/1ET2rXG5EWV01dRvoGY7M5GKtDvS1ptP5P8KgomLalBA/
 ## Dataset Source
 https://openflights.org/data.html (OpenFlights Airport and Route datasets)
 
-
 ## Leading Question
 
 Welcome to REEF airlines! How may we be of assistance! Using the data given by the CS 225 repository, our group has decided to help travelers find the quickest, easiest path from one airport to another. Our goal for this project was to use concepts we learned in 225 to create a program that allows us to efficiently search for short paths within a graphical representation of our data. Each node being an airport in the world, and each edge being a flight connecting the two airports. Our team decided to use Dijkstra's Shortest Path Algorithm and A* algorithm to analyze different paths between nodes and find the shortest one connecting them. A* is well-rounded  and checks every node within its reach, while also optimizing the time spent analyzing each path. We will also be using Dijkstra’s shortest path algorithm which is self explanatory. A breadth-first search traversal will also be used as it can find a node regardless of the size of the tree. This can be used by the traveler to reach any point on the graph. For instance, they could choose a starting location and they will be able to see all the possible airports  Our graph will be able to accommodate for new airports and flights added as the world is ever increasing in size and travel methods. Thank you for riding with us and we hope you enjoyed your flight!

@@ -43,6 +43,8 @@ class processCSV {
         std::vector<Route> allEdges;
         std::map<int, AirportNode> airportIdMap; //airport id and corresponding airportnode
         std::map<int, std::vector<std::pair<AirportNode,double> > > adjList; // airport id, adj vector
+        std::map<int, std::string> idToName; // airport id, airport name
+        std::map<std::string, int> nameToId; // airport name, airport id
 
 };
 

@@ -47,6 +47,8 @@ void processCSV::createAirportNode(std::vector<std::string> & data) {
         airport.longitude = std::stod(airportComponents[5]);
         nodes.push_back(airport);
         airportIdMap.insert(std::pair<int, struct AirportNode>(airport.id, airport));
+        idToName.insert(std::pair<int, std::string>(airport.id, airport.name));
+        nameToId.insert(std::pair<std::string, int>(airport.name, airport.id));
     }
     allNodes = nodes;
 }

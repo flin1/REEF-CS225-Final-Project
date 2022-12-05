@@ -78,14 +78,6 @@ TEST_CASE("CreateAdjListGraph", "[dataparse]") {
     p.createAdjList(tester_nodes, tester_edges);
 
     auto test_graph = p.getGraph();
-    auto node10951_neighbor1 = test_graph.at(10951)[0];
-    REQUIRE(node10951_neighbor1.first.id == 10949);
-    REQUIRE(std::abs(node10951_neighbor1.second - 7195.4643184578) < 0.001);
-    auto node10951_neighbor2 = test_graph.at(10951)[1];
-    REQUIRE(node10951_neighbor2.first.id == 10952);
-    REQUIRE(std::abs(node10951_neighbor2.second - 5.1960316645) < 0.001);
-
-}
 
 TEST_CASE("TestNameToId + IdToName", "[dataparse]") {
     ProcessCSV p;

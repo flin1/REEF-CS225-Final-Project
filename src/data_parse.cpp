@@ -11,6 +11,7 @@ std::vector<std::string> processCSV::fileToVector(std::string & filename) {
     std::vector<std::string> data;
     bool first_label = true;
     if (input.good()) {
+        std::cout << "good input" << std::endl;
         while (getline(input, line)) {
             if (first_label) {
                 first_label = false;
@@ -22,6 +23,7 @@ std::vector<std::string> processCSV::fileToVector(std::string & filename) {
         }
     }
     input.close();
+    std::cout << " about to return" << std::endl;
     return data;
 }
 
@@ -41,10 +43,11 @@ void processCSV::createAirportNode(std::vector<std::string> & data) {
         // set airport for each value in the vector
         airport.id = std::stoi(airportComponents[0]);
         airport.name = airportComponents[1]; 
-        airport.city = airportComponents[2];
-        airport.country = airportComponents[3];
-        airport.latitude = std::stod(airportComponents[4]);
-        airport.longitude = std::stod(airportComponents[5]);
+        // airport.city = airportComponents[2];
+        airport.country = airportComponents[2];
+        std::cout << airportComponents[3] << std::endl;
+        airport.latitude = std::stod(airportComponents[3]);
+        airport.longitude = std::stod(airportComponents[4]);
         nodes.push_back(airport);
         airportIdMap.insert(std::pair<int, struct AirportNode>(airport.id, airport));
         idToName.insert(std::pair<int, std::string>(airport.id, airport.name));

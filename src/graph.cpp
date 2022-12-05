@@ -115,32 +115,18 @@ void dfsUtil(int airport_id, map<int, bool> & visited, const std::map<int, std::
 {
     // Mark the current node as visited and print it
     visited.at(airport_id) = true;
-    cout << airport_id << endl;
-
+    // cout << airport_id << " ";
+ 
     // Recur for all the vertices adjacent to this vertex
     auto neighbors = graph.at(airport_id);
-    // cout << airport_id << "'s neighbors: ";
-    // for (auto n : neighbors) {
-    //     cout << n.first.id;
-    // }
-    // cout << '\n';
     for (auto i = neighbors.begin(); i != neighbors.end(); ++i)
         if (!visited.at(i->first.id))
-            dfsUtil(i->first.id, visited, graph);
+            DFSUtil(i->first.id, visited, graph);
 }
 
 void kosaraju( const std::map<int, std::vector<std::pair<processCSV::AirportNode,double> > > &graph, const std::vector<processCSV::AirportNode> & allNodes) {
     stack<int> Stack;
     // cout << "Starting Kosaraju" << endl;
-    for (auto n : allNodes) {
-        auto neighbors = graph.at(n.id);
-        cout << n.id << "'s neighbors:";
-        for (auto p : neighbors) {
-            cout << p.first.id;
-        }
-        cout << '\n';
-    }
-
     // Mark all the vertices as not visited (For first DFS)
     map<int, bool> visited; // { airport_id, IsVisited=true/false }
     for(auto node : allNodes)
@@ -172,8 +158,9 @@ void kosaraju( const std::map<int, std::vector<std::pair<processCSV::AirportNode
         // cout << "trying to visit: " << v << endl;
         if (visited.at(v) == false)
         {
+
             dfsUtil(v, visited, transpose_graph);
-            cout <<'\n';
+            cout << endl;
         }
     }
 }

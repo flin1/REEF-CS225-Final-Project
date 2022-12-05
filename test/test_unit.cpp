@@ -13,7 +13,7 @@ TEST_CASE("a dummy test") {
 }
 
 TEST_CASE("ParseInAirportNodes", "[dataparse]") {
-    processCSV p;
+    ProcessCSV p;
     string filename = "test/dummyairports.csv"; // path should be from EXECUTABLE (so where tests is, currently in main directory)
     vector<string> tester_data = p.fileToVector(filename);
     vector<string> ans =
@@ -40,7 +40,7 @@ TEST_CASE("ParseInAirportNodes", "[dataparse]") {
 }
 
 TEST_CASE("ParseInAirportRoutes", "[dataparse]") {
-    processCSV p;
+    ProcessCSV p;
 
     string filename1 = "test/dummyairports.csv";
     vector<string> tester_data_airport = p.fileToVector(filename1);
@@ -65,7 +65,7 @@ TEST_CASE("ParseInAirportRoutes", "[dataparse]") {
 }
 
 TEST_CASE("CreateAdjListGraph", "[dataparse]") {
-    processCSV p;
+    ProcessCSV p;
     string filename1 = "test/dummyairports.csv";
     vector<string> tester_data_airport = p.fileToVector(filename1);
     p.createAirportNode(tester_data_airport);
@@ -87,26 +87,51 @@ TEST_CASE("CreateAdjListGraph", "[dataparse]") {
 
 }
 
+TEST_CASE("TestNameToId + IdToName", "[dataparse]") {
+    ProcessCSV p;
+    string filename = "test/dummyairports.csv"; // path should be from EXECUTABLE (so where tests is, currently in main directory)
+    vector<string> tester_data = p.fileToVector(filename);
+    vector<string> ans =
+    { "10939,Shennongjia Hongping Airport,Shennongjia,China,31.626,110.34",
+        "10940,Zhangjiakou Ningyuan Airport,Zhangjiakou,China,40.7386016846,114.930000305",
+        "10941,Arxan Yi'ershi Airport,Arxan,China,47.3106,119.9117",
+        "10942,Hengyang Nanyue Airport,Hengyang,China,26.9053,112.627998",
+        "10943,Hongyuan Airport,Ngawa,China,32.53154,102.35224",
+        "10949,Wonsan Kalma International Airport,Wonsan,North Korea,39.166801,127.486",
+        "10951,Mestia Queen Tamar Airport,Mestia,Georgia,43.053597,42.749012",
+        "10952,Magas Airport,Magas,Russia,43.3222999573,45.0125999451",
+        "11004,Talladega Municipal Airport,Talladega,United States,33.569900512699995,-86.05090332030001" };
+    REQUIRE(tester_data == ans);
 
-TEST_CASE("Dijkstras", "[traversal]") {
-    processCSV p;
-    string filename1 = "test/dummyairports.csv";
-    vector<string> tester_data_airport = p.fileToVector(filename1);
-    p.createAirportNode(tester_data_airport);
+    p.createAirportNode(tester_data);
     auto tester_nodes = p.getNodes();
-
-    string filename2 = "test/dummyroutes.csv";
-    vector<string> tester_data_routes = p.fileToVector(filename2);
-    p.createRoute(tester_data_routes);
-    auto tester_edges = p.getEdges();
-
-    p.createAdjList(tester_nodes, tester_edges);
-    auto graph = p.getGraph();
-
-    vector<int> shortest_path = Dijkstra(graph, 10941, 11004, tester_nodes);
-
-    REQUIRE(shortest_path[0] == 10941);
-    REQUIRE(shortest_path[1] == 10942);
-    REQUIRE(shortest_path[2] == 11004);
-
+    std::map<int, std::string> id_to_name = p.getIdToName();
+    std::map<std::string, int> name_to_id = p.getNameToId();
+    REQUIRE(name_to_id["Zhangjiakou Ningyuan Airport"] == 10940);
+    REQUIRE(id_to_name[10940] == "Zhangjiakou Ningyuan Airport");
 }
+
+
+
+// TEST_CASE("Dijkstras", "[traversal]") {
+//     ProcessCSV p;
+//     string filename1 = "test/dummyairports.csv";
+//     vector<string> tester_data_airport = p.fileToVector(filename1);
+//     p.createAirportNode(tester_data_airport);
+//     auto tester_nodes = p.getNodes();
+
+//     string filename2 = "test/dummyroutes.csv";
+//     vector<string> tester_data_routes = p.fileToVector(filename2);
+//     p.createRoute(tester_data_routes);
+//     auto tester_edges = p.getEdges();
+
+//     p.createAdjList(tester_nodes, tester_edges);
+//     auto graph = p.getGraph();
+
+//     vector<int> shortest_path = Dijkstra(graph, 10941, 11004, tester_nodes);
+
+//     REQUIRE(shortest_path[0] == 10941);
+//     REQUIRE(shortest_path[1] == 10942);
+//     REQUIRE(shortest_path[2] == 11004);
+
+// }

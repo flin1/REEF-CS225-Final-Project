@@ -9,6 +9,6 @@
 // #include <algorithm>
 
 //Dijkstra's Shortest Path Algorithm
-std::vector<int> Dijkstra(const std::map<int, std::vector<std::pair<processCSV::AirportNode,double> > >& graph, int origin_airport_id, int destination_airport_id,  const std::vector<processCSV::AirportNode>& allNodes);
+std::vector<int> Dijkstra(const std::map<int, std::vector<std::pair<ProcessCSV::AirportNode,double> > >& graph, int origin_airport_id, int destination_airport_id,  const std::vector<ProcessCSV::AirportNode>& allNodes);
 // std::vector<int> AStar(int origin_airport_id, int destination_airport_id);
 

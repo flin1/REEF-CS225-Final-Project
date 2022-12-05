@@ -6,7 +6,7 @@ using namespace std;
  * Dijkstra's Shortest Path Algorithm
  * This function finds the shortest path from the 1st airport to the 2nd airport.
  */
-vector<int> Dijkstra(const std::map<int, std::vector<std::pair<processCSV::AirportNode,double> > > &graph, int origin_airport_id, int destination_airport_id, const std::vector<processCSV::AirportNode> & allNodes) {
+vector<int> Dijkstra(const std::map<int, std::vector<std::pair<ProcessCSV::AirportNode,double> > > &graph, int origin_airport_id, int destination_airport_id, const std::vector<ProcessCSV::AirportNode> & allNodes) {
     // DEFAULT SETUP
     map<int,double> distances; // {neighbor_id, neighbor_distance} Keeps track of distances to each neighbor airport
     distances.insert({origin_airport_id, 0}); // Set distance to starting point as 0.

@@ -45,7 +45,34 @@ def convert_routes_csv():
     df_routes.drop(df_routes[df_routes['Stops'] != 0].index, inplace = True)
     # df_routes = df_routes.iloc[1: , :]
     df_routes.to_csv('./data/routes.csv', index = False, header = False)
+
+def get_all_airport_names():
+    '''Adds field names and filters out airports.csv'''
+    df_airports = pd.read_csv ("/Users/emilyho/Desktop/REEF-CS225-Final-Project/data/old_airports.csv", header = None)
+    # df_airports = pd.read_csv ('../data/old_airports.csv', header = None)
+    df_airports.columns = ['Airport ID', 'Name', 'City', 'Country', 'IATA', 'ICAO',
+        'Latitude', 'Longitude', 'Altitude', 'Timezone', 'DST',
+        'TZ Database Time Zone', 'Type', 'Source']
+    df_airports.drop('Airport ID', axis = 1, inplace = True)
+    df_airports.drop('IATA', axis = 1, inplace = True)
+    df_airports.drop('ICAO', axis = 1, inplace = True)
+    df_airports.drop('Altitude', axis = 1, inplace = True)
+    df_airports.drop('Timezone', axis = 1, inplace = True)
+    df_airports.drop('DST', axis = 1, inplace = True)
+    df_airports.drop('TZ Database Time Zone', axis = 1, inplace = True)
+    df_airports.drop('Type', axis = 1, inplace = True)
+    df_airports.drop('Source', axis = 1, inplace = True)
+    df_airports.drop('City', axis = 1, inplace = True)
+    df_airports.drop('Country', axis = 1, inplace = True)
+    df_airports.drop('Longitude', axis = 1, inplace = True)
+    df_airports.drop('Latitude', axis = 1, inplace = True)
     
+    
+    df_airports['Name'] = df_airports['Name'].apply(lambda x: x.replace(',', ''))
+    df_airports['Name'] = df_airports['Name'].apply(lambda x: x.replace('"', ''))
+    df_airports['Name'] = df_airports['Name'].str.encode('ascii', 'ignore').str.decode('ascii')
+    df_airports.to_csv('./data/airport_names.csv', index = False, header = False)
+get_all_airport_names()
 convert_airports_csv()
 convert_routes_csv()
     

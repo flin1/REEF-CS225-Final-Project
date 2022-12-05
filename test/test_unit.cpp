@@ -185,11 +185,7 @@ TEST_CASE("ParseInAirportNodes", "[dataparse]") {
 //         cout << p << endl;
 //     }
 
-<<<<<<< HEAD
-=======
-// }
 
->>>>>>> 0a6a795 (added kosaraju scc)
 TEST_CASE("Kosaraju SCC", "[algorithm]") {
     processCSV p;
     string filename1 = "test/dummyairports.csv";
@@ -202,22 +198,11 @@ TEST_CASE("Kosaraju SCC", "[algorithm]") {
     p.createRoute(tester_data_routes);
     auto tester_edges = p.getEdges();
 
-<<<<<<< HEAD
     // for (auto n : tester_nodes) {
     //     std::cout << n.id << std::endl;
     // }
     p.createAdjList(tester_nodes, tester_edges);
     auto test_graph = p.getGraph();
     kosaraju(test_graph, tester_nodes);
-=======
-    for (auto n : tester_nodes) {
-        std::cout << n.id << std::endl;
-    }
-    p.createAdjList(tester_nodes, tester_edges);
-    auto test_graph = p.getGraph();
-    Kosaraju(test_graph, tester_nodes);
->>>>>>> 0a6a795 (added kosaraju scc)
-
-
     REQUIRE(3==3);
 }

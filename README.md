@@ -1,7 +1,7 @@
 # REEF-CS225-Final-Project
 CS225 Final Project FA22 
 
-** Developers: ** 
+**Developers:** 
 - Rachel Tin
 - Emily Ho
 - Esther Lee 
@@ -31,7 +31,9 @@ A breadth-first search traversal will also be used as it can find a node regardl
 
 ## File Structure
 The raw data and cleaned data are located within the data directory in a .csv format. Raw data is identifiable using the "old" prefix. 
+
 The results.md file is located in the main directory alongside the README.md.
+
 The results.md file contains a written description of our function outputs and success in making the functions work, as well as how well we answered the leading question.
 
 All code is located in the src directory:
@@ -47,15 +49,15 @@ All code is located in the src directory:
       - BFS: type "BFS", insert only 1 airport name
       - Dijkstra's: type "Dijkstra", insert name of 2 airports
       - Kosaraju's: type "Kosaraju", no airport names needed
-  ** If airport names are more than one word, put entire name of an airport inside double quotes
+  **If airport names are more than one word, put entire name of an airport inside double quotes**
   - Hit "enter" and then run!
 
 
-** Example of Using BFS in the Command Line: **
+**Example of Using BFS in the Command Line:**
   * using Nadzab Airport as our start airport
   ./main BFS "Nadzab Airport"
 
-** Example of Using Dijkstra Algorithm in the Command Line: ** 
+**Example of Using Dijkstra Algorithm in the Command Line:** 
   * using Nadzab Airport and Tofino as our start airport and end airport
   ./main Dijkstra "Nadzab Airport" Tofino
 
@@ -72,7 +74,7 @@ Test cases for this codebase are located within the tests directory and can be f
 - BFS traversal functionality + correct output
 - Kosaraju's algorithm functionality + correct output
 
-** The tests can be executed using the following commands: ** 
+**The tests can be executed using the following commands:** 
 ```
 make tests
 ./tests

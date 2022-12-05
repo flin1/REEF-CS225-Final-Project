@@ -1,4 +1,5 @@
 #include "data_parse.h"
+#include <iostream>
 
 // takes in a file name to be opened with fstream
 // returns vector of vector of strings that store the CSV info with each line being an index in the vector
@@ -8,9 +9,16 @@ std::vector<std::string> processCSV::fileToVector(std::string & filename) {
     input.open(filename);
     std::string line;
     std::vector<std::string> data;
+    bool first_label = true;
     if (input.good()) {
         while (getline(input, line)) {
-            data.push_back(line);
+            if (first_label) {
+                first_label = false;
+                continue;
+            } else {
+                data.push_back(line);
+            }
+
         }
     }
     input.close();

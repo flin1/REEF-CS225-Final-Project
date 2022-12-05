@@ -631,7 +631,6 @@ Airport ID,Name,City,Country,Latitude,Longitude
 638,Kristiansand Airport,Kristiansand,Norway,58.204201,8.08537
 639,Geilo Airport Dagali,Geilo,Norway,60.41730117797852,8.518349647521973
 640,Bardufoss Airport,Bardufoss,Norway,69.055801391602,18.540399551392
-641,"Harstad/Narvik Airport, Evenes",Harstad/Narvik,Norway,68.491302490234,16.678100585938
 642,Leirin Airport,Fagernes,Norway,61.015598297119,9.2880601882935
 643,Florø Airport,Floro,Norway,61.583599090576,5.0247201919556
 644,Oslo Lufthavn,Oslo,Norway,60.121,11.0502
@@ -647,13 +646,9 @@ Airport ID,Name,City,Country,Latitude,Longitude
 654,Notodden Airport,Notodden,Norway,59.565701,9.21222
 655,Ørland Airport,Orland,Norway,63.69889831542969,9.604000091552734
 656,Røros Airport,Roros,Norway,62.578399658203,11.342300415039
-657,"Moss Airport, Rygge",Rygge,Norway,59.378817,10.785439
-658,"Svalbard Airport, Longyear",Svalbard,Norway,78.246101379395,15.465600013733
 659,Skien Airport,Skien,Norway,59.185001373291016,9.566940307617188
 660,Stord Airport,Stord,Norway,59.791900634765625,5.340849876403809
 662,Sandnessjøen Airport (Stokka),Sandnessjoen,Norway,65.956802368164,12.468899726868
-663,"Tromsø Airport,",Tromso,Norway,69.68329620361328,18.91889953613281
-664,"Sandefjord Airport, Torp",Sandefjord,Norway,59.1866989136,10.258600235
 665,Trondheim Airport Værnes,Trondheim,Norway,63.4578018,10.9239998
 666,Stavanger Airport Sola,Stavanger,Norway,58.876701354,5.6377801895
 667,Babice Airport,Warsaw,Poland,52.26850128173828,20.910999298095703
@@ -664,7 +659,6 @@ Airport ID,Name,City,Country,Latitude,Longitude
 673,Mielec Airport,Mielec,Poland,50.32229995727539,21.462099075317383
 674,Poznań-Ławica Airport,Poznan,Poland,52.4210014343,16.8262996674
 675,Rzeszów-Jasionka Airport,Rzeszow,Poland,50.1100006104,22.0189990997
-676,"Szczecin-Goleniów ""Solidarność"" Airport",Szczecin,Poland,53.584701538100006,14.9021997452
 677,Redzikowo Air Base,Slupsk,Poland,54.47890090942383,17.107500076293945
 678,Swidwin Military Air Base,Shapaja,Poland,53.790599823,15.8262996674
 679,Warsaw Chopin Airport,Warsaw,Poland,52.1656990051,20.9671001434

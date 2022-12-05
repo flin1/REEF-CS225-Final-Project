@@ -3,6 +3,7 @@
 
 #include "../src/data_parse.h"
 #include "../src/graph.h"
+#include "../src/BFS.h"
 #include "./catch/catch.hpp"
 
 using namespace std;
@@ -87,6 +88,33 @@ TEST_CASE("CreateAdjListGraph", "[dataparse]") {
 
 }
 
+TEST_CASE("BFS test", "[bfs]") {
+    processCSV p;
+    string filename1 = "test/dummyairports.csv";
+    vector<string> tester_data_airport = p.fileToVector(filename1);
+    p.createAirportNode(tester_data_airport);
+    auto tester_nodes = p.getNodes();
+
+    string filename2 = "test/dummyroutes.csv";
+    vector<string> tester_data_routes = p.fileToVector(filename2);
+    p.createRoute(tester_data_routes);
+    auto tester_edges = p.getEdges();
+    p.createAdjList(tester_nodes, tester_edges);
+    auto adjlist = p.getGraph();
+
+    std::vector<int> ans = p.BFS(10939,adjlist);
+    std::vector<int> correct = {10939,10940};
+    REQUIRE(ans == correct);
+
+    ans = p.BFS(10941,adjlist);
+    correct = {10941,10942,11004};
+    REQUIRE(ans == correct);
+
+    ans = p.BFS(10951,adjlist);
+    correct = {10951,10949,10952};
+    REQUIRE(ans == correct);
+
+}
 
 TEST_CASE("Dijkstras", "[traversal]") {
     processCSV p;

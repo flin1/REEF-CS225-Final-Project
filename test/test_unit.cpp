@@ -149,12 +149,12 @@ TEST_CASE("Kosaraju SCC", "[algorithm]") {
     p.createRoute(tester_data_routes);
     auto tester_edges = p.getEdges();
 
-    for (auto n : tester_nodes) {
-        std::cout << n.id << std::endl;
-    }
+    // for (auto n : tester_nodes) {
+    //     std::cout << n.id << std::endl;
+    // }
     p.createAdjList(tester_nodes, tester_edges);
     auto test_graph = p.getGraph();
-    Kosaraju(test_graph, tester_nodes);
+    kosaraju(test_graph, tester_nodes);
 
 
     REQUIRE(3==3);

@@ -3,7 +3,7 @@
 // takes in a file name to be opened with fstream
 // returns vector of vector of strings that store the CSV info with each line being an index in the vector
 // and each word contained within a vector for that line
-std::vector<std::string> processCSV::fileToVector(std::string & filename) {
+std::vector<std::string> ProcessCSV::fileToVector(std::string & filename) {
     std::ifstream input;
     input.open(filename);
     std::string line;
@@ -18,7 +18,7 @@ std::vector<std::string> processCSV::fileToVector(std::string & filename) {
 }
 
 // create vector of structs that fill in the information acquired by the fileToVector function
-void processCSV::createAirportNode(std::vector<std::string> & data) {
+void ProcessCSV::createAirportNode(std::vector<std::string> & data) {
     std::vector<struct AirportNode> nodes;
     for (std::string line : data) {
         AirportNode airport;
@@ -38,13 +38,15 @@ void processCSV::createAirportNode(std::vector<std::string> & data) {
         airport.latitude = std::stod(airportComponents[4]);
         airport.longitude = std::stod(airportComponents[5]);
         nodes.push_back(airport);
-        airportIdMap.insert(std::pair<int, struct AirportNode>(airport.id, airport));
+        airportIdMap_.insert(std::pair<int, struct AirportNode>(airport.id, airport));
+        idToName_.insert(std::pair<int, std::string>(airport.id, airport.name));
+        nameToId_.insert(std::pair<std::string, int>(airport.name, airport.id));
     }
-    allNodes = nodes;
+    allNodes_ = nodes;
 }
 
 // create vector of structs that fill in the information acquired by the fileToVector function
-void processCSV::createRoute(std::vector<std::string> & data) {
+void ProcessCSV::createRoute(std::vector<std::string> & data) {
     std::vector<struct Route> edges;
     for (std::string line : data) {
         Route route;
@@ -60,8 +62,8 @@ void processCSV::createRoute(std::vector<std::string> & data) {
         route.sourceID = std::stoi(routeComponents[0]); 
         route.destinationID = std::stoi(routeComponents[1]);
         // add distance (pythagorean theorem) (long1-long2)^2 + (lat1-lat2)^2
-        AirportNode source = airportIdMap[route.sourceID];
-        AirportNode dest = airportIdMap[route.destinationID];
+        AirportNode source = airportIdMap_[route.sourceID];
+        AirportNode dest = airportIdMap_[route.destinationID];
         double sourceLong = source.longitude;
         double sourceLat = source.latitude;
         double destLong = dest.longitude;
@@ -69,24 +71,24 @@ void processCSV::createRoute(std::vector<std::string> & data) {
         route.distance = pow((sourceLong-destLong), 2) + pow((sourceLat-destLat), 2);
         edges.push_back(route);
     }
-    allEdges = edges;
+    allEdges_ = edges;
 }
 
-void processCSV::createAdjList(std::vector<struct AirportNode> & allNodes, std::vector<struct Route> & allEdges) {
+void ProcessCSV::createAdjList(std::vector<struct AirportNode> & allNodes, std::vector<struct Route> & allEdges) {
     // pre load adjList with keys and empty vectors
     // set every key in adjList to be an airportNode
     for (AirportNode airport : allNodes) {
         std::vector<std::pair<AirportNode,double>> airportVect;
         std::pair<int,std::vector<std::pair<AirportNode,double>>> pair (airport.id, airportVect); // airport id, adj vector
-        adjList.insert(pair);
+        adjList_.insert(pair);
     }
     // traverse vector of edges 
     for (unsigned i = 0; i < allEdges.size(); i++) {
         // get destination node based on ID 
-        AirportNode destination = airportIdMap[allEdges[i].destinationID];
+        AirportNode destination = airportIdMap_[allEdges[i].destinationID];
 
         // find vector in adjList that corresponds to the source airport
-        std::vector<std::pair<AirportNode,double>> & neighbors = adjList[allEdges[i].sourceID];
+        std::vector<std::pair<AirportNode,double>> & neighbors = adjList_[allEdges[i].sourceID];
         // add destination node to the vector of the source airport
         std::pair<AirportNode, double> pair (destination, allEdges[i].distance);
         neighbors.push_back(pair);

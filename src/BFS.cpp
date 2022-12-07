@@ -1,13 +1,13 @@
 #include "BFS.h"
 #include "data_parse.h"
 
-std::vector<int> BFS::BFS(int startVertex, std::map<int, std::vector<std::pair<AirportNode,double> > > adjList) { 
-  
+std::vector<int> BFSTraversal(int startVertex, std::map<int, std::vector<std::pair<processCSV::AirportNode,double> > > adjList) { 
+  std::map<int, bool > mapVisited; //{airporId : true/false}
   mapVisited.clear();
   std::vector<int> result;
   std::queue<int> q; 
   //marks the starting node as vistited and pushes it to queue
-  q.push_back(startVertex); 
+  q.push(startVertex); 
   mapVisited[startVertex] = true;
   int curr = 0;
 
@@ -17,12 +17,12 @@ std::vector<int> BFS::BFS(int startVertex, std::map<int, std::vector<std::pair<A
 
     result.push_back(curr);
 
-    std::vector<std::pair<AirportNode,double> > adj = adjList[curr];
+    std::vector<std::pair<processCSV::AirportNode,double> > adj = adjList[curr];
   
     for (auto& it : adj) { 
       if (mapVisited[it.first.id] == false) { 
         mapVisited[it.first.id] = true; 
-        q.push_back(it.first.id); 
+        q.push(it.first.id); 
       } 
     } 
   } 

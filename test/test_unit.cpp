@@ -102,15 +102,15 @@ TEST_CASE("BFS test", "[bfs]") {
     p.createAdjList(tester_nodes, tester_edges);
     auto adjlist = p.getGraph();
 
-    std::vector<int> ans = p.BFS(10939,adjlist);
+    std::vector<int> ans = BFSTraversal(10939,adjlist);
     std::vector<int> correct = {10939,10940};
     REQUIRE(ans == correct);
 
-    ans = p.BFS(10941,adjlist);
+    ans = BFSTraversal(10941,adjlist);
     correct = {10941,10942,11004};
     REQUIRE(ans == correct);
 
-    ans = p.BFS(10951,adjlist);
+    ans = BFSTraversal(10951,adjlist);
     correct = {10951,10949,10952};
     REQUIRE(ans == correct);
 

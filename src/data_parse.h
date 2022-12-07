@@ -22,6 +22,7 @@ class ProcessCSV {
         int destinationID;
         double distance;
     };
+
     // takes in a file name to be opened with fstream
     // returns vector of vector of strings that store the CSV info with each line being an index in the vector
     // and each word contained within a vector for that line

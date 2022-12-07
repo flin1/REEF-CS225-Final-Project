@@ -10,18 +10,18 @@ using namespace std;
  */
 vector<int> dijkstra(const std::map<int, std::vector<std::pair<ProcessCSV::AirportNode,double> > > &graph, int origin_airport_id, int destination_airport_id, const std::vector<ProcessCSV::AirportNode> & allNodes) {
     // DEFAULT SETUP
-    std::cout << __LINE__ << std::endl;
+    // std::cout << __LINE__ << std::endl;
     map<int,double> distances; // {neighbor_id, neighbor_distance} Keeps track of distances to each neighbor airport
     distances.insert({origin_airport_id, 0}); // Set distance to starting point as 0.
     // std::cout << "before inserting into distances" << std::endl;
     for (auto airport : allNodes) {
-        std::cout << __LINE__ << std::endl;
+        // std::cout << __LINE__ << std::endl;
         distances.insert({airport.id, INFINITY}); // Distances to all other nodes are INFINITY.
 
     }
     map<int, int> previous; // {previous_airportID, next_airportID} Keeps track of path so we can backtrace later. i.e. Airport1_id -> Airport2_id -> Airport3_id
     vector<bool> visited(graph.size(), false);
-    std::cout << __LINE__ << std::endl;
+    // std::cout << __LINE__ << std::endl;
     auto comparator = [](pair<double, int> input1, pair<double, int> input2) { return input1.first > input2.first; };
     priority_queue<pair<double,int>, vector<pair<double,int> >, decltype(comparator) > priorityQueue(comparator); // Priority Queue is needed instead of normal queue so that popping from the top will always give us the node w/ smallest distance.
     priorityQueue.push({0,origin_airport_id}); // Push starting node into priority queue. Priority Queue: {airport_distance, airport_id}
@@ -47,12 +47,12 @@ vector<int> dijkstra(const std::map<int, std::vector<std::pair<ProcessCSV::Airpo
                 // std::cout << "neighbor hasn't been visited yet" << std::endl;
                 double neighbor_cost = distances[current_airport] + neighbor_node.second;
                 if (neighbor_cost < distances[neighbor]) { // Update cumulative distances to neighbor nodes
-                    std::cout << __LINE__ << std::endl;
+                    // std::cout << __LINE__ << std::endl;
                     distances[neighbor] = neighbor_cost;
                     priorityQueue.push({distances[neighbor], neighbor}); // Add to PQ. If that neighbor already existed in PQ, this one will simply take precedence and end up popped first.
                     // std::cout << "add to PQ: " << distances[neighbor] << std::endl;
                     previous[neighbor] = current_airport;
-                    std::cout << __LINE__ << std::endl;
+                    // std::cout << __LINE__ << std::endl;
                 }
 
             }
@@ -71,12 +71,12 @@ vector<int> dijkstra(const std::map<int, std::vector<std::pair<ProcessCSV::Airpo
     int backtrace_id = destination_airport_id;
     vector<int> path;
     while (backtrace_id != origin_airport_id) {
-        std::cout << __LINE__ << std::endl;
+        // std::cout << __LINE__ << std::endl;
         path.push_back(backtrace_id);
         backtrace_id = previous[backtrace_id];
     }
     path.push_back(origin_airport_id);
-    std::cout << __LINE__ << std::endl;
+    // std::cout << __LINE__ << std::endl;
     reverse(path.begin(), path.end());
     // std::cout << "finished reversing" << std::endl;
     // FINAL RESULT: vector holding airport_id's of traversal in order

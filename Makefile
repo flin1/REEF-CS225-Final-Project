@@ -27,7 +27,7 @@
 # 	rm *.o output
 
 
-CC = clang++
+CC = clang++ -std=c++11 -Wno-error=reserved-user-defined-literal
 CFLAGS = -Wall -g -w -std=c++1y -c
 LDFLAGS = -std=c++1y -stdlib=libc++ -lc++abi
 

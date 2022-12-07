@@ -4,7 +4,9 @@ import pandas as pd
 
 def convert_airports_csv():
     '''Adds field names and filters out airports.csv'''
-    df_airports = pd.read_csv ("/Users/emilyho/Desktop/REEF-CS225-Final-Project/data/old_airports.csv", header = None)
+    df_airports = pd.read_csv (
+        "/Users/emilyho/Desktop/REEF-CS225-Final-Project/data/old_airports.csv",
+        header = None)
     # df_airports = pd.read_csv ('../data/old_airports.csv', header = None)
     df_airports.columns = ['Airport ID', 'Name', 'City', 'Country', 'IATA', 'ICAO',
         'Latitude', 'Longitude', 'Altitude', 'Timezone', 'DST',
@@ -18,20 +20,15 @@ def convert_airports_csv():
     df_airports.drop('Type', axis = 1, inplace = True)
     df_airports.drop('Source', axis = 1, inplace = True)
     df_airports.drop('City', axis = 1, inplace = True)
-    
     df_airports['Name'] = df_airports['Name'].apply(lambda x: x.replace(',', ''))
-    # df_airports['City'] = df_airports['City'].apply(lambda x: x.replace(',', ''))
     df_airports['Name'] = df_airports['Name'].apply(lambda x: x.replace('"', ''))
-    # df_airports['City'] = df_airports['City'].apply(lambda x: x.replace('\'', ''))
     df_airports['Country'] = df_airports['Country'].apply(lambda x: x.replace('"', ''))
-    
     df_airports['Name'] = df_airports['Name'].str.encode('ascii', 'ignore').str.decode('ascii')
-    # df_airports.drop(df_airports[df_airports['Name'] != 0].index, inplace = True)
-    # df_airports = df_airports.iloc[1: , :]
     df_airports.to_csv('./data/airports.csv', index = False, header = False)
 def convert_routes_csv():
     '''this function adds field names to routes.csv and converts to an updated csv file'''
-    df_routes = pd.read_csv ('/Users/emilyho/Desktop/REEF-CS225-Final-Project/data/old_routes.csv', header = None)
+    df_routes = pd.read_csv ('/Users/emilyho/Desktop/REEF-CS225-Final-Project/data/old_routes.csv',
+        header = None)
     df_routes.columns = ['Airline', 'Airline ID', 'Source Airport', 'Source Airport ID',
         'Destination Airport', 'Destination Airport ID', 'Codeshare', 'Stops', 'Equipment']
     df_routes.drop('Airline', axis = 1, inplace = True)
@@ -48,7 +45,8 @@ def convert_routes_csv():
 
 def get_all_airport_names():
     '''Adds field names and filters out airports.csv'''
-    df_airports = pd.read_csv ("/Users/emilyho/Desktop/REEF-CS225-Final-Project/data/old_airports.csv", header = None)
+    df_airports = pd.read_csv (
+        "/Users/emilyho/Desktop/REEF-CS225-Final-Project/data/old_airports.csv", header = None)
     # df_airports = pd.read_csv ('../data/old_airports.csv', header = None)
     df_airports.columns = ['Airport ID', 'Name', 'City', 'Country', 'IATA', 'ICAO',
         'Latitude', 'Longitude', 'Altitude', 'Timezone', 'DST',
@@ -66,8 +64,6 @@ def get_all_airport_names():
     df_airports.drop('Country', axis = 1, inplace = True)
     df_airports.drop('Longitude', axis = 1, inplace = True)
     df_airports.drop('Latitude', axis = 1, inplace = True)
-    
-    
     df_airports['Name'] = df_airports['Name'].apply(lambda x: x.replace(',', ''))
     df_airports['Name'] = df_airports['Name'].apply(lambda x: x.replace('"', ''))
     df_airports['Name'] = df_airports['Name'].str.encode('ascii', 'ignore').str.decode('ascii')

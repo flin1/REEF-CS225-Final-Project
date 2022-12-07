@@ -10,13 +10,11 @@ std::vector<std::string> processCSV::fileToVector(std::string & filename) {
     std::string line;
     std::vector<std::string> data;
     if (input.good()) {
-        std::cout << "good input" << std::endl;
         while (getline(input, line)) {
             data.push_back(line);
         }
     }
     input.close();
-    std::cout << " about to return" << std::endl;
     return data;
 }
 
@@ -38,7 +36,6 @@ void processCSV::createAirportNode(std::vector<std::string> & data) {
         airport.name = airportComponents[1]; 
         // airport.city = airportComponents[2];
         airport.country = airportComponents[2];
-        std::cout << airportComponents[3] << std::endl;
         airport.latitude = std::stod(airportComponents[3]);
         airport.longitude = std::stod(airportComponents[4]);
         nodes.push_back(airport);

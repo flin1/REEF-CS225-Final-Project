@@ -53,7 +53,7 @@ int main(int numArgs, char *arcv[]) {
         return 0;
 
     } else {
-        processCSV data_;
+        ProcessCSV data_;
         std::string airports_directory_ = "data/airports.csv";
         std::vector<std::string> airports_vector_ = data_.fileToVector(airports_directory_);
         data_.createAirportNode(airports_vector_);
@@ -62,11 +62,11 @@ int main(int numArgs, char *arcv[]) {
         std::vector<std::string> routes_vector_ = data_.fileToVector(routes_directory_);
         data_.createRoute(routes_vector_);
 
-        std::vector<processCSV::AirportNode> nodes_ = data_.getNodes();
-        std::vector<processCSV::Route> edges_ = data_.getEdges();
+        std::vector<ProcessCSV::AirportNode> nodes_ = data_.getNodes();
+        std::vector<ProcessCSV::Route> edges_ = data_.getEdges();
         data_.createAdjList(nodes_, edges_);
 
-        std::map<int, std::vector<std::pair<processCSV::AirportNode,double>>> graph_ = data_.getGraph();
+        std::map<int, std::vector<std::pair<ProcessCSV::AirportNode,double>>> graph_ = data_.getGraph();
 
         std::ofstream myfile;
         myfile.open ("output.txt");
@@ -88,17 +88,34 @@ int main(int numArgs, char *arcv[]) {
             std::cout << "Ending Airport: " << arcv[3] << std::endl;
             std::cout << "Start Node: " << name_to_id[arcv[2]] << std::endl;
             std::cout << "End Node: " << name_to_id[arcv[3]] << std::endl;
-            std::vector<int> Dij_ = Dijkstra(graph_, name_to_id[start_node], name_to_id[end_node], nodes_);
-
-
-            std::cout << "Total Number of Airports (Including Start and End Airports): " << Dij_.size() << std::endl;
-            std::map<int, std::string> id_to_name = data_.getIdToName();
-            int i = 1;
-            for (auto item: Dij_) {
-                std::cout << "Airport " << i << ": " << id_to_name[item] << std::endl;
-                i++;
+            std::vector<int> Dij_ = dijkstra(graph_, name_to_id[start_node], name_to_id[end_node], nodes_);
+            if (Dij_.size() != 0) {
+                std::cout << Dij_.size() << std::endl;
+                std::cout << "Total Number of Airports (Including Start and End Airports): " << Dij_.size() << std::endl;
+                std::map<int, std::string> id_to_name = data_.getIdToName();
+                int i = 1;
+                for (auto item: Dij_) {
+                    std::cout << "Airport " << i << ": " << id_to_name[item] << std::endl;
+                    i++;
+                }
+            } else {
+                std::cout << "no path :(" << std::endl;
             }
             return 0;
+        }
+        if (strcmp(arcv[1], "Kosaraju") == 0) {
+            std::cout << "Kos" << std::endl;
+            std::map<int, std::string> id_to_name = data_.getIdToName();
+            std::cout << "after map" << std::endl;
+            std::vector<std::vector<int>> Kosaraju_ = kosaraju(graph_, nodes_);
+            std::cout << "after function" << std::endl;
+            for (auto vect : Kosaraju_) {
+                std::cout << "Strongly Connected Component: ";
+                for (auto item: vect) {
+                    std::cout << id_to_name[item] << ", ";
+                }
+                std::cout << "\n";
+            }
         }
 
         // if (strcmp(arcv[1], "A-star") == 0) {

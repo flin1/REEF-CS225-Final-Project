@@ -111,11 +111,11 @@ std::map<int, std::vector<std::pair<processCSV::AirportNode,double> > > getTrans
 }
 
 // A recursive function to print DFS starting from v
-void dfsUtil(int airport_id, map<int, bool> & visited, const std::map<int, std::vector<std::pair<processCSV::AirportNode,double> > > &graph)
+void dfsUtil(int airport_id, map<int, bool> & visited, const std::map<int, std::vector<std::pair<processCSV::AirportNode,double> > > &graph, vector<int> & connected_component)
 {
     // Mark the current node as visited and print it
     visited.at(airport_id) = true;
-    cout << airport_id << endl;
+    connected_component.push_back(airport_id);
 
     // Recur for all the vertices adjacent to this vertex
     auto neighbors = graph.at(airport_id);
@@ -126,21 +126,22 @@ void dfsUtil(int airport_id, map<int, bool> & visited, const std::map<int, std::
     // cout << '\n';
     for (auto i = neighbors.begin(); i != neighbors.end(); ++i)
         if (!visited.at(i->first.id))
-            dfsUtil(i->first.id, visited, graph);
+            dfsUtil(i->first.id, visited, graph, connected_component);
+
 }
 
-void kosaraju( const std::map<int, std::vector<std::pair<processCSV::AirportNode,double> > > &graph, const std::vector<processCSV::AirportNode> & allNodes) {
+vector<vector<int>> kosaraju( const std::map<int, std::vector<std::pair<processCSV::AirportNode,double> > > &graph, const std::vector<processCSV::AirportNode> & allNodes) {
     stack<int> Stack;
     // cout << "Starting Kosaraju" << endl;
-    for (auto n : allNodes) {
-        auto neighbors = graph.at(n.id);
-        cout << n.id << "'s neighbors:";
-        for (auto p : neighbors) {
-            cout << p.first.id;
-        }
-        cout << '\n';
-    }
-
+    // for (auto n : allNodes) {
+    //     auto neighbors = graph.at(n.id);
+    //     cout << n.id << "'s neighbors:";
+    //     for (auto p : neighbors) {
+    //         cout << p.first.id;
+    //     }
+    //     cout << '\n';
+    // }
+    vector<vector<int>> strongly_connected_components;
     // Mark all the vertices as not visited (For first DFS)
     map<int, bool> visited; // { airport_id, IsVisited=true/false }
     for(auto node : allNodes)
@@ -172,8 +173,11 @@ void kosaraju( const std::map<int, std::vector<std::pair<processCSV::AirportNode
         // cout << "trying to visit: " << v << endl;
         if (visited.at(v) == false)
         {
-            dfsUtil(v, visited, transpose_graph);
-            cout <<'\n';
+            std::vector<int> component;
+            dfsUtil(v, visited, transpose_graph, component);
+            strongly_connected_components.push_back(component);
         }
     }
+
+    return strongly_connected_components;
 }

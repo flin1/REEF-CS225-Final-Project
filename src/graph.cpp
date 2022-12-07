@@ -28,6 +28,7 @@ vector<int> dijkstra(const std::map<int, std::vector<std::pair<ProcessCSV::Airpo
         int current_airport = priorityQueue.top().second;
         visited.at(current_airport) = true;
         priorityQueue.pop(); // Get next best neighbor w shortest distance
+        // std::cout << "priorityQueue.pop()" << std::endl;
         for (auto neighbor_node : graph.at(current_airport)) {
             int neighbor = neighbor_node.first.id;
             if (visited[neighbor] == false) {
@@ -35,6 +36,7 @@ vector<int> dijkstra(const std::map<int, std::vector<std::pair<ProcessCSV::Airpo
                 if (neighbor_cost < distances[neighbor]) { // Update cumulative distances to neighbor nodes
                     distances[neighbor] = neighbor_cost;
                     priorityQueue.push({distances[neighbor], neighbor}); // Add to PQ. If that neighbor already existed in PQ, this one will simply take precedence and end up popped first.
+                    // std::cout << "add to PQ: " << distances[neighbor] << std::endl;
                     previous[neighbor] = current_airport;
                 }
 

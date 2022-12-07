@@ -12,4 +12,4 @@
 //https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/
 
 //represents a directed graph to perform bfs traversal on
-std::vector<int> BFSTraversal( int startVertex, std::map<int, std::vector<std::pair<processCSV::AirportNode,double> > > adjList);
+std::vector<int> BFSTraversal( int startVertex, std::map<int, std::vector<std::pair<ProcessCSV::AirportNode,double> > > adjList);

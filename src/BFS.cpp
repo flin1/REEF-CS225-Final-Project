@@ -1,7 +1,7 @@
 #include "BFS.h"
 #include "data_parse.h"
 
-std::vector<int> BFSTraversal(int startVertex, std::map<int, std::vector<std::pair<processCSV::AirportNode,double> > > adjList) { 
+std::vector<int> BFSTraversal(int startVertex, std::map<int, std::vector<std::pair<ProcessCSV::AirportNode,double> > > adjList) { 
   std::map<int, bool > mapVisited; //{airporId : true/false}
   mapVisited.clear();
   std::vector<int> result;
@@ -17,7 +17,7 @@ std::vector<int> BFSTraversal(int startVertex, std::map<int, std::vector<std::pa
 
     result.push_back(curr);
 
-    std::vector<std::pair<processCSV::AirportNode,double> > adj = adjList[curr];
+    std::vector<std::pair<ProcessCSV::AirportNode,double> > adj = adjList[curr];
   
     for (auto& it : adj) { 
       if (mapVisited[it.first.id] == false) { 

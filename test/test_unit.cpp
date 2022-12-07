@@ -112,26 +112,74 @@ TEST_CASE("TestNameToId + IdToName", "[dataparse]") {
 }
 
 
+TEST_CASE("Dijkstras", "[traversal]") {
+    ProcessCSV p;
+    string filename1 = "test/dummyairports.csv";
+    vector<string> tester_data_airport = p.fileToVector(filename1);
+    p.createAirportNode(tester_data_airport);
+    auto tester_nodes = p.getNodes();
+    std::cout << __LINE__ << std::endl;
+    string filename2 = "test/dummyroutes.csv";
+    vector<string> tester_data_routes = p.fileToVector(filename2);
+    p.createRoute(tester_data_routes);
+    auto tester_edges = p.getEdges();
+    std::cout << __LINE__ << std::endl;
+    p.createAdjList(tester_nodes, tester_edges);
+    auto graph = p.getGraph();
+    std::cout << __LINE__ << std::endl;
+    vector<int> shortest_path = dijkstra(graph, 10941, 11004, tester_nodes);
+    std::cout << __LINE__ << std::endl;
+    REQUIRE(shortest_path[0] == 10941);
+    REQUIRE(shortest_path[1] == 10942);
+    REQUIRE(shortest_path[2] == 11004);
 
-// TEST_CASE("Dijkstras", "[traversal]") {
-//     ProcessCSV p;
-//     string filename1 = "test/dummyairports.csv";
+}
+
+TEST_CASE("Kosaraju SCC", "[algorithm]") {
+    ProcessCSV p;
+    string filename1 = "test/dummyairports.csv";
+    vector<string> tester_data_airport = p.fileToVector(filename1);
+    p.createAirportNode(tester_data_airport);
+    auto tester_nodes = p.getNodes();
+
+    string filename2 = "test/dummyroutes2.csv";
+    vector<string> tester_data_routes = p.fileToVector(filename2);
+    p.createRoute(tester_data_routes);
+    auto tester_edges = p.getEdges();
+
+    p.createAdjList(tester_nodes, tester_edges);
+    auto test_graph = p.getGraph();
+    vector<vector<int>> strongly_connected_components = kosaraju(test_graph, tester_nodes);
+    auto component1 = strongly_connected_components[0];
+    REQUIRE(std::find(component1.begin(), component1.end(), 10949) != component1.end());
+    REQUIRE(std::find(component1.begin(), component1.end(), 10951) != component1.end());
+    REQUIRE(std::find(component1.begin(), component1.end(), 10952) != component1.end());
+}
+
+// TEST_CASE("Dijkstras Large", "[traversal]") {
+//     processCSV p;
+//     string filename1 = "data/airports.csv";
 //     vector<string> tester_data_airport = p.fileToVector(filename1);
+//     cout << __LINE__ << endl;
 //     p.createAirportNode(tester_data_airport);
+//     cout << __LINE__ << endl;
 //     auto tester_nodes = p.getNodes();
+//     cout << __LINE__ << endl;
 
-//     string filename2 = "test/dummyroutes.csv";
+//     string filename2 = "data/routes.csv";
 //     vector<string> tester_data_routes = p.fileToVector(filename2);
 //     p.createRoute(tester_data_routes);
 //     auto tester_edges = p.getEdges();
+//     cout << __LINE__ << endl;
 
 //     p.createAdjList(tester_nodes, tester_edges);
 //     auto graph = p.getGraph();
+//     cout << __LINE__ << endl;
 
-//     vector<int> shortest_path = Dijkstra(graph, 10941, 11004, tester_nodes);
+//     vector<int> shortest_path = dijkstra(graph, 3697, 3830, tester_nodes);
 
-//     REQUIRE(shortest_path[0] == 10941);
-//     REQUIRE(shortest_path[1] == 10942);
-//     REQUIRE(shortest_path[2] == 11004);
+//     for (auto p : shortest_path) {
+//         cout << p << endl;
+//     }
 
 // }

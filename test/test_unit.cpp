@@ -92,15 +92,15 @@ TEST_CASE("TestNameToId + IdToName", "[dataparse]") {
     string filename = "test/dummyairports.csv"; // path should be from EXECUTABLE (so where tests is, currently in main directory)
     vector<string> tester_data = p.fileToVector(filename);
     vector<string> ans =
-    { "10939,Shennongjia Hongping Airport,Shennongjia,China,31.626,110.34",
-        "10940,Zhangjiakou Ningyuan Airport,Zhangjiakou,China,40.7386016846,114.930000305",
-        "10941,Arxan Yi'ershi Airport,Arxan,China,47.3106,119.9117",
-        "10942,Hengyang Nanyue Airport,Hengyang,China,26.9053,112.627998",
-        "10943,Hongyuan Airport,Ngawa,China,32.53154,102.35224",
-        "10949,Wonsan Kalma International Airport,Wonsan,North Korea,39.166801,127.486",
-        "10951,Mestia Queen Tamar Airport,Mestia,Georgia,43.053597,42.749012",
-        "10952,Magas Airport,Magas,Russia,43.3222999573,45.0125999451",
-        "11004,Talladega Municipal Airport,Talladega,United States,33.569900512699995,-86.05090332030001" };
+    { "10939,Shennongjia Hongping Airport,China,31.626,110.34",
+        "10940,Zhangjiakou Ningyuan Airport,China,40.7386016846,114.930000305",
+        "10941,Arxan Yi'ershi Airport,China,47.3106,119.9117",
+        "10942,Hengyang Nanyue Airport,China,26.9053,112.627998",
+        "10943,Hongyuan Airport,China,32.53154,102.35224",
+        "10949,Wonsan Kalma International Airport,North Korea,39.166801,127.486",
+        "10951,Mestia Queen Tamar Airport,Georgia,43.053597,42.749012",
+        "10952,Magas Airport,Russia,43.3222999573,45.0125999451",
+        "11004,Talladega Municipal Airport,United States,33.569900512699995,-86.05090332030001" };
     REQUIRE(tester_data == ans);
 
     p.createAirportNode(tester_data);
@@ -118,17 +118,17 @@ TEST_CASE("Dijkstras", "[traversal]") {
     vector<string> tester_data_airport = p.fileToVector(filename1);
     p.createAirportNode(tester_data_airport);
     auto tester_nodes = p.getNodes();
-    std::cout << __LINE__ << std::endl;
+    // std::cout << __LINE__ << std::endl;
     string filename2 = "test/dummyroutes.csv";
     vector<string> tester_data_routes = p.fileToVector(filename2);
     p.createRoute(tester_data_routes);
     auto tester_edges = p.getEdges();
-    std::cout << __LINE__ << std::endl;
+    // std::cout << __LINE__ << std::endl;
     p.createAdjList(tester_nodes, tester_edges);
     auto graph = p.getGraph();
-    std::cout << __LINE__ << std::endl;
+    // std::cout << __LINE__ << std::endl;
     vector<int> shortest_path = dijkstra(graph, 10941, 11004, tester_nodes);
-    std::cout << __LINE__ << std::endl;
+    // std::cout << __LINE__ << std::endl;
     REQUIRE(shortest_path[0] == 10941);
     REQUIRE(shortest_path[1] == 10942);
     REQUIRE(shortest_path[2] == 11004);

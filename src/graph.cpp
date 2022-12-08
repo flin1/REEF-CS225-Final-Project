@@ -1,6 +1,7 @@
 #include "graph.h"
 #include <unordered_set>
 #include <list>
+#include <stack>
 
 using namespace std;
 

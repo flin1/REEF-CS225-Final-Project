@@ -44,6 +44,7 @@ vector<int> dijkstra(const std::map<int, std::vector<std::pair<ProcessCSV::Airpo
 
         }
 
+
         visited[current_airport] = true; // Mark current node as visited. Should not be re-added to PQ
     }
 
@@ -61,7 +62,9 @@ vector<int> dijkstra(const std::map<int, std::vector<std::pair<ProcessCSV::Airpo
     path.push_back(origin_airport_id);
     reverse(path.begin(), path.end());
     // std::cout << "finished reversing" << std::endl;
+    // std::cout << "finished reversing" << std::endl;
     // FINAL RESULT: vector holding airport_id's of traversal in order
+    // std::cout << "about to return" << std::endl;
     // std::cout << "about to return" << std::endl;
     return path;
 }

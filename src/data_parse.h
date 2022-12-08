@@ -17,7 +17,7 @@ class ProcessCSV {
         double longitude;
     };
 
-    struct Route {
+    public : struct Route {
         int sourceID;
         int destinationID;
         double distance;
@@ -35,7 +35,6 @@ class ProcessCSV {
 
     void createAdjList(std::vector<AirportNode> & allNodes, std::vector<Route> & allEdges);
 
-
     std::vector<AirportNode> getNodes() {return allNodes_;};
     std::vector<Route> getEdges() {return allEdges_;};
     std::map<int, std::vector<std::pair<AirportNode,double> > > getGraph() {return adjList_;};
@@ -49,6 +48,7 @@ class ProcessCSV {
         std::map<int, std::vector<std::pair<AirportNode,double> > > adjList_; // airport id, adj vector
         std::map<int, std::string> idToName_; // airport id, airport name
         std::map<std::string, int> nameToId_; // airport name, airport id
+
 
 };
 

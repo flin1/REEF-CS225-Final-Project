@@ -95,7 +95,9 @@ vector<int> dijkstra(const std::map<int, std::vector<std::pair<ProcessCSV::Airpo
  */
 
 // DFS traversal. Records time it found that node. Once finished traversing all its neighbors, add to stack.
+
 void fillOrder(int v, map<int, bool> & visited, stack<int> &Stack, const std::map<int, std::vector<std::pair<ProcessCSV::AirportNode,double> > > &graph)
+
 {
     // Mark the current node as visited
     visited.at(v) = true;
@@ -139,6 +141,7 @@ std::map<int, std::vector<std::pair<ProcessCSV::AirportNode,double> > > getTrans
 
 // A recursive function to print DFS starting from v
 void dfsUtil(int airport_id, map<int, bool> & visited, const std::map<int, std::vector<std::pair<ProcessCSV::AirportNode,double> > > &graph, vector<int> & connected_component)
+
 {
     // Mark the current node as visited and print it
     visited.at(airport_id) = true;

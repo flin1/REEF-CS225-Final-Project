@@ -142,18 +142,21 @@ TEST_CASE("Kosaraju SCC", "[algorithm]") {
     p.createAirportNode(tester_data_airport);
     auto tester_nodes = p.getNodes();
 
-    string filename2 = "test/dummyroutes2.csv";
+    std::cout << __LINE__ << std::endl;
+    string filename2 = "test/dummyroutes.csv";
     vector<string> tester_data_routes = p.fileToVector(filename2);
     p.createRoute(tester_data_routes);
     auto tester_edges = p.getEdges();
-
+    std::cout << __LINE__ << std::endl;
     p.createAdjList(tester_nodes, tester_edges);
-    auto test_graph = p.getGraph();
-    vector<vector<int>> strongly_connected_components = kosaraju(test_graph, tester_nodes);
-    auto component1 = strongly_connected_components[0];
-    REQUIRE(std::find(component1.begin(), component1.end(), 10949) != component1.end());
-    REQUIRE(std::find(component1.begin(), component1.end(), 10951) != component1.end());
-    REQUIRE(std::find(component1.begin(), component1.end(), 10952) != component1.end());
+    auto graph = p.getGraph();
+    std::cout << __LINE__ << std::endl;
+    vector<int> shortest_path = dijkstra(graph, 10941, 11004, tester_nodes);
+    std::cout << __LINE__ << std::endl;
+    REQUIRE(shortest_path[0] == 10941);
+    REQUIRE(shortest_path[1] == 10942);
+    REQUIRE(shortest_path[2] == 11004);
+
 }
 
 // TEST_CASE("Dijkstras Large", "[traversal]") {
@@ -183,3 +186,25 @@ TEST_CASE("Kosaraju SCC", "[algorithm]") {
 //     }
 
 // }
+
+TEST_CASE("Kosaraju SCC", "[algorithm]") {
+    ProcessCSV p;
+    string filename1 = "test/dummyairports.csv";
+    vector<string> tester_data_airport = p.fileToVector(filename1);
+    p.createAirportNode(tester_data_airport);
+    auto tester_nodes = p.getNodes();
+
+    string filename2 = "test/dummyroutes2.csv";
+    vector<string> tester_data_routes = p.fileToVector(filename2);
+    p.createRoute(tester_data_routes);
+    auto tester_edges = p.getEdges();
+
+    p.createAdjList(tester_nodes, tester_edges);
+    auto test_graph = p.getGraph();
+    vector<vector<int>> strongly_connected_components = kosaraju(test_graph, tester_nodes);
+
+    auto component1 = strongly_connected_components[0];
+    REQUIRE(std::find(component1.begin(), component1.end(), 10949) != component1.end());
+    REQUIRE(std::find(component1.begin(), component1.end(), 10951) != component1.end());
+    REQUIRE(std::find(component1.begin(), component1.end(), 10952) != component1.end());
+}

@@ -34,7 +34,6 @@ void ProcessCSV::createAirportNode(std::vector<std::string> & data) {
         // set airport for each value in the vector
         airport.id = std::stoi(airportComponents[0]);
         airport.name = airportComponents[1]; 
-        // airport.city = airportComponents[2];
         airport.country = airportComponents[2];
         airport.latitude = std::stod(airportComponents[3]);
         airport.longitude = std::stod(airportComponents[4]);

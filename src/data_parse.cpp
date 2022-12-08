@@ -1,4 +1,5 @@
 #include "data_parse.h"
+#include <iostream>
 
 // takes in a file name to be opened with fstream
 // returns vector of vector of strings that store the CSV info with each line being an index in the vector
@@ -33,10 +34,10 @@ void ProcessCSV::createAirportNode(std::vector<std::string> & data) {
         // set airport for each value in the vector
         airport.id = std::stoi(airportComponents[0]);
         airport.name = airportComponents[1]; 
-        airport.city = airportComponents[2];
-        airport.country = airportComponents[3];
-        airport.latitude = std::stod(airportComponents[4]);
-        airport.longitude = std::stod(airportComponents[5]);
+        // airport.city = airportComponents[2];
+        airport.country = airportComponents[2];
+        airport.latitude = std::stod(airportComponents[3]);
+        airport.longitude = std::stod(airportComponents[4]);
         nodes.push_back(airport);
         airportIdMap_.insert(std::pair<int, struct AirportNode>(airport.id, airport));
         idToName_.insert(std::pair<int, std::string>(airport.id, airport.name));

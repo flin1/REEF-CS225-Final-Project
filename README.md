@@ -38,7 +38,7 @@ The results.md file contains a written description of our function outputs and s
 
 All code is located in the src directory:
 - The convert.py file cleans the data and removes unnecessary/bad data using python pandas
-- The data_parse.h and data_parse.cpp files create a processCSV class to go through the .csv files and converts them to c++ nodes and edges. These nodes and edges are then organized in the form of an adjacency list to be used by the BFS and shortest path algoritms
+- The data_parse.h and data_parse.cpp files create a ProcessCSV class to go through the .csv files and converts them to c++ nodes and edges. These nodes and edges are then organized in the form of an adjacency list to be used by the BFS and shortest path algoritms
 - The graph.h and graph.cpp files hold the Dijkstra's algorithm (used to find the shortest path between any given set of two airports) and Kosaraju's algorithm (which locates strongly connected components). 
 - The BFS.h and BFS.cpp files store the BFS traversal algorithm to traverse through all the nodes within our graph.
 
@@ -49,6 +49,7 @@ All code is located in the src directory:
       - BFS: type "BFS", insert only 1 airport name
       - Dijkstra's: type "Dijkstra", insert name of 2 airports
       - Kosaraju's: type "Kosaraju", no airport names needed
+      
   **If airport names are more than one word, put entire name of an airport inside double quotes**
   - Hit "enter" and then run!
 
@@ -63,6 +64,8 @@ All code is located in the src directory:
 
 
 [INCLUDE KOSARAJU INSTRUCTIONS]
+**Example of Using Kosaraju Algorithm in the Command Line:** 
+  ./main Kosaraju
 
 ## Tests 
  

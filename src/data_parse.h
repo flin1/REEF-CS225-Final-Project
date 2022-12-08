@@ -35,12 +35,13 @@ class ProcessCSV {
 
     void createAdjList(std::vector<AirportNode> & allNodes, std::vector<Route> & allEdges);
 
+
     std::vector<AirportNode> getNodes() {return allNodes_;};
     std::vector<Route> getEdges() {return allEdges_;};
     std::map<int, std::vector<std::pair<AirportNode,double> > > getGraph() {return adjList_;};
     std::map<int, std::string> getIdToName() {return idToName_;};
     std::map<std::string, int> getNameToId() {return nameToId_;};
-    
+
     private: 
         std::vector<AirportNode> allNodes_;
         std::vector<Route> allEdges_;

@@ -3,6 +3,7 @@
 #include <vector>
 #include "data_parse.h"
 #include "graph.h"
+#include "BFS.h"
 
 // #include "../data/airports.csv"
 // #include "../data/routes.csv"
@@ -71,10 +72,18 @@ int main(int numArgs, char *arcv[]) {
         std::ofstream myfile;
         myfile.open ("output.txt");
 
-        // if (strcmp(arcv[1], "BFS") == 0) {
-        //     std::cout << "BFS()" << std::endl;
-        //     return 0;
-        // }
+        if (strcmp(arcv[1], "BFS") == 0) {
+            std::string start_node = arcv[2];
+            std::cout << start_node << std::endl;
+            std::map<std::string, int> name_to_id = data_.getNameToId();
+            std::map<int, std::string> id_to_name = data_.getIdToName();
+            std::cout << "ID: " << name_to_id[start_node] << std::endl;
+            std::vector<int> BFS_ = BFSTraversal(name_to_id[start_node], graph_);
+            // for (auto item : BFS_) {
+            //     std::cout << id_to_name[item] << std::endl;
+            // }
+            return 0;
+        }
         if (strcmp(arcv[1], "Dijkstra") == 0) {
             // ./main Dijkstra "Narsarsuaq Airport" "Talladega Municipal Airport"
 

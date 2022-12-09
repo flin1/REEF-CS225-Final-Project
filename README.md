@@ -51,7 +51,7 @@ All code is located in the src directory:
   
 Possible Graph Algorithms:
 
-[ MUST USE AN AIRPORT NAME FROM TABLE AT BOTTOM OF FILE ]
+[ MUST USE AN AIRPORT NAME FROM TABLE. SEE BOTTOM OF THIS PAGE ]
 
 **Using BFS in the Command Line:** ```./main BFS "airport_name"```
 

@@ -19,7 +19,9 @@ https://openflights.org/data.html (OpenFlights Airport and Route datasets)
 
 ## Leading Question
 
-Welcome to REEF airlines! How may we be of assistance? Using the data given by the CS 225 repository, our group has decided to help travelers find the quickest, easiest path from one airport to another. Our goal for this project was to use concepts we learned in CS225 to create a program that allows us to efficiently search for short paths within a graphical representation of our data. Each node being an airport in the world, and each edge being a flight connecting the two airports. 
+Welcome to REEF airlines!✈️☁️ How may we be of assistance?
+
+Using the data given by the CS 225 repository, our group has decided to help travelers find the **quickest, easiest path from one airport to another**. Our goal for this project was to use concepts we learned in CS225 to create a program that allows us to efficiently search for short paths within a graphical representation of our data. Each node being an airport in the world, and each edge being a flight connecting the two airports. 
 
 Our team decided to use Dijkstra's Shortest Path Algorithm to analyze different paths between nodes and find the shortest one connecting them. 
 [INCLUDE MORE DETAIL]
@@ -45,24 +47,23 @@ All code is located in the src directory:
 ## Running Instructions
   - All inputted items will be separated by spaces. Begin command line argument with "./main"
   - Input name graph algorithm you want to use
-    - Possible Graph Algorithms
-      - BFS: type "BFS", insert only 1 airport name
-      - Dijkstra's: type "Dijkstra", insert name of 2 airports
-      - Kosaraju's: type "Kosaraju", no airport names needed
-  **If airport names are more than one word, put entire name of an airport inside double quotes**
   - Hit "enter" and then run!
+  
+Possible Graph Algorithms:
+
+**Using BFS in the Command Line:** ```./main BFS "airport_name"```
+
+  * Example: using Nadzab Airport as our start airport: ```./main BFS "Nadzab Airport"```
+
+**Using Dijkstra Algorithm in the Command Line:** ```./main Dijkstra "airport1_name" "airport2_name"```
+      
+  * Example: Nadzab Airport and Tofino as our start airport and end airport: ```./main Dijkstra "Nadzab Airport" "Tofino"```
+  
+**Using Kosaraju Algorithm in the Command Line:** ```./main Kosaraju```
+
+[ IF AIRPORT NAMES ARE MORE THAN ONE WORD, PUT ENTIRE NAME OF AN AIRPORT INSIDE DOUBLE QUOTES ]
 
 
-**Example of Using BFS in the Command Line:**
-  * using Nadzab Airport as our start airport
-  ./main BFS "Nadzab Airport"
-
-**Example of Using Dijkstra Algorithm in the Command Line:** 
-  * using Nadzab Airport and Tofino as our start airport and end airport
-  ./main Dijkstra "Nadzab Airport" Tofino
-
-
-[INCLUDE KOSARAJU INSTRUCTIONS]
 
 ## Tests 
  

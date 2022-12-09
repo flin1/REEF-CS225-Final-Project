@@ -61,15 +61,20 @@ void ProcessCSV::createRoute(std::vector<std::string> & data) {
         // set route for each value in the vector
         route.sourceID = std::stoi(routeComponents[0]); 
         route.destinationID = std::stoi(routeComponents[1]);
-        // add distance (pythagorean theorem) (long1-long2)^2 + (lat1-lat2)^2
-        AirportNode source = airportIdMap_[route.sourceID];
-        AirportNode dest = airportIdMap_[route.destinationID];
-        double sourceLong = source.longitude;
-        double sourceLat = source.latitude;
-        double destLong = dest.longitude;
-        double destLat = dest.latitude;
-        route.distance = pow((sourceLong-destLong), 2) + pow((sourceLat-destLat), 2);
-        edges.push_back(route);
+
+        // check if source and destination in route are in allnodes 
+        if (idToName_.find(route.sourceID) != idToName_.end() && idToName_.find(route.destinationID) != idToName_.end()) {
+            // add route if both nodes exist
+            // add distance (pythagorean theorem) (long1-long2)^2 + (lat1-lat2)^2
+            AirportNode source = airportIdMap_[route.sourceID];
+            AirportNode dest = airportIdMap_[route.destinationID];
+            double sourceLong = source.longitude;
+            double sourceLat = source.latitude;
+            double destLong = dest.longitude;
+            double destLat = dest.latitude;
+            route.distance = pow((sourceLong-destLong), 2) + pow((sourceLat-destLat), 2);
+            edges.push_back(route);
+        }
     }
     allEdges_ = edges;
 }
@@ -93,10 +98,4 @@ void ProcessCSV::createAdjList(std::vector<struct AirportNode> & allNodes, std::
         std::pair<AirportNode, double> pair (destination, allEdges[i].distance);
         neighbors.push_back(pair);
     }
-
-    // check adj list for nodes without any connections
-
-    // check routes for nodes that don't exist 
-
-
 }

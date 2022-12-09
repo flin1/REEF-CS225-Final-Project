@@ -45,6 +45,7 @@ All code is located in the src directory:
 - The BFS.h and BFS.cpp files store the BFS traversal algorithm to traverse through all the nodes within our graph.
 
 ## Running Instructions
+  - Begin by running ```make clean```
   - All inputted items will be separated by spaces. Begin command line argument with "./main"
   - Input name graph algorithm you want to use
   - Hit "enter" and then run!

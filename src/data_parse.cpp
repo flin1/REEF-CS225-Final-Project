@@ -93,4 +93,10 @@ void ProcessCSV::createAdjList(std::vector<struct AirportNode> & allNodes, std::
         std::pair<AirportNode, double> pair (destination, allEdges[i].distance);
         neighbors.push_back(pair);
     }
+
+    // check adj list for nodes without any connections
+
+    // check routes for nodes that don't exist 
+
+
 }

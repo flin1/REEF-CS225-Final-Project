@@ -53,7 +53,8 @@ TEST_CASE("ParseInAirportRoutes", "[dataparse]") {
     "10941,10942,0",
     "10942,11004,0",
     "10951,10949,0",
-    "10951,10952,0" };
+    "10952,10951,0",
+    "10949,10952,0" };
     REQUIRE(tester_data == ans);
 
     p.createRoute(tester_data);
@@ -78,6 +79,7 @@ TEST_CASE("CreateAdjListGraph", "[dataparse]") {
     p.createAdjList(tester_nodes, tester_edges);
 
     auto test_graph = p.getGraph();
+}
 
 TEST_CASE("TestNameToId + IdToName", "[dataparse]") {
     ProcessCSV p;
@@ -148,30 +150,25 @@ TEST_CASE("Kosaraju SCC", "[algorithm]") {
     REQUIRE(std::find(component1.begin(), component1.end(), 10952) != component1.end());
 }
 
-// TEST_CASE("Dijkstras Large", "[traversal]") {
-//     processCSV p;
-//     string filename1 = "data/airports.csv";
-//     vector<string> tester_data_airport = p.fileToVector(filename1);
-//     cout << __LINE__ << endl;
-//     p.createAirportNode(tester_data_airport);
-//     cout << __LINE__ << endl;
-//     auto tester_nodes = p.getNodes();
-//     cout << __LINE__ << endl;
+TEST_CASE("Dijkstras Large", "[traversal]") {
+    ProcessCSV p;
+    string filename1 = "data/airports.csv";
+    vector<string> tester_data_airport = p.fileToVector(filename1);
+    p.createAirportNode(tester_data_airport);
+    auto tester_nodes = p.getNodes();
 
-//     string filename2 = "data/routes.csv";
-//     vector<string> tester_data_routes = p.fileToVector(filename2);
-//     p.createRoute(tester_data_routes);
-//     auto tester_edges = p.getEdges();
-//     cout << __LINE__ << endl;
+    string filename2 = "data/routes.csv";
+    vector<string> tester_data_routes = p.fileToVector(filename2);
+    p.createRoute(tester_data_routes);
+    auto tester_edges = p.getEdges();
 
-//     p.createAdjList(tester_nodes, tester_edges);
-//     auto graph = p.getGraph();
-//     cout << __LINE__ << endl;
+    p.createAdjList(tester_nodes, tester_edges);
+    auto graph = p.getGraph();
 
-//     vector<int> shortest_path = dijkstra(graph, 3697, 3830, tester_nodes);
+    vector<int> shortest_path = dijkstra(graph, 3697, 3830, tester_nodes);
 
-//     for (auto p : shortest_path) {
-//         cout << p << endl;
-//     }
+    for (auto p : shortest_path) {
+        cout << p << endl;
+    }
 
-// }
+}

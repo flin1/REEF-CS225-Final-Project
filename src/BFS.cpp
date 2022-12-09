@@ -1,47 +1,30 @@
 #include "BFS.h"
+#include "data_parse.h"
 
-BFS::BFS(int vertex) {
-  numVertices = vertex;
-  adjacency_list = new std::vector<int>[vertex];
+std::vector<int> BFSTraversal(int startVertex, std::map<int, std::vector<std::pair<ProcessCSV::AirportNode,double> > > adjList) { 
+  std::map<int, bool > mapVisited; //{airportId : true/false}
   mapVisited.clear();
-}
+  std::vector<int> result;
+  std::queue<int> q; 
+  //marks the starting node as vistited and pushes it to queue
+  q.push(startVertex); 
+  mapVisited[startVertex] = true;
+  int curr = 0;
 
-BFS::~BFS() {
-  if (adjacency_list != NULL){
-    delete[] adjacency_list; 
-  }
-}
+  while(!q.empty()) { 
+    curr = q.front(); 
+    q.pop(); 
 
-//add dest to source's adjacency_list
-void BFS::addEdge(int source, int destination) {
-  adjacency_list[source].push_back(destination);
-}
+    result.push_back(curr);
 
-std::vector<std::string> BFS::BFS(int startVertex, string airport_file, string route_file) { 
-   graph g();
-    std::vector<Vertex> vec = g.getVertices();
-    std::vector<std::string> result;
-    std::queue<int> q; 
-    //marks the starting node as vistited and pushes it to queue
-    q.push(startVertex); 
-    mapVisited[startVertex] = true;
-
-    int curr = 0;
+    std::vector<std::pair<ProcessCSV::AirportNode,double> > adj = adjList[curr];
   
-    while(!q.empty()) { 
-        curr = q.front(); 
-        q.pop(); 
-
-        result.push_back(vec[curr]);
-       //std::cout << vec[curr] << std::endl; 
-        std::vector<int> adj = adjacency_list[curr];
-  
-        for (auto& it : adj) { 
-            if (mapVisited[it] == false) { 
-              mapVisited[it] = true; 
-              q.push(it); 
-            } 
-        } 
+    for (auto& it : adj) { 
+      if (mapVisited[it.first.id] == false) { 
+        mapVisited[it.first.id] = true; 
+        q.push(it.first.id); 
+      } 
     } 
-    return result;
+  } 
+  return result;
 } 

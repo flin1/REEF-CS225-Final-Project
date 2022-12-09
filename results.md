@@ -6,17 +6,17 @@
 
 The above command will output the following:
 
-Unalaska Airport
+BFS Algorithm:
 
-ID: 3860
+Starting Airport: Unalaska Airport
 
-Unalaska Airport
+Airport 0: Unalaska Airport
 
-Atka Airport
+Airport 1: Atka Airport
 
-Nikolski Air Station
+Airport 2: Nikolski Air Station
 
-Akutan Seaplane Base
+Airport 3: Akutan Seaplane Base
 
 This is an example of the BFS traversal finding all the connected airports to the user inputted one. As shown, you can get to Atka, Nikolski, or Akutan from the Unalaska Airport. With the help of the BFS, a user can then see all the airports they can possibly reach from their starting point to help plan their trip. The BFS traversal was tested on the dummy dataset ("dummyaiarports.csv", "dummyroutes.csv") and passed all test cases which checked to see if the traversal from airport_id=10939, 10941, 10951 all outputted a vector traversing the correct nodes.
 
@@ -25,6 +25,14 @@ This is an example of the BFS traversal finding all the connected airports to th
 ```./main Dijkstra "La Guardia Airport" "Chicago O'Hare International Airport"``` 
 
 The above command will output the following: 
+
+Dijkstra's Algorithm:
+
+Starting Airport: La Guardia Airport
+
+Ending Airport: Chicago O'Hare International Airport
+
+Total Number of Airports (Including Starting and Ending Airports): 8
 
 Airport 1: La Guardia Airport
 
@@ -48,7 +56,7 @@ This is an example of finding the shortest path between two airports using this 
 ### Kosaraju's Strongly Connected Components 
 ```./main Kosaraju```
 
-This is an example of finding all the strongly connected components. This will output a long list. Taking a look at line 888 shows us "Strongly Connected Component: Zhangjiakou Ningyuan Airport, Shijiazhuang Daguocun International Airport, Taiwan Taoyuan International Airport, ..." which means they are all airports with routes reachable to every single other airport in that cluster. Some other airports, such as "Thurrock Airfield" in line 905 are shown as its own SCC, which means it's not strongly connected to any other airports
+This is an example of finding all the strongly connected components. This will output a long list. Taking a look at line 4514 shows us "Strongly Connected Component: Goroka Airport, Madang Airport, Mount Hagen Kagamuga Airport, ..." which means they are all airports with routes reachable to every single other airport in that cluster. Some other airports, such as "Thurrock Airfield" in line 904 are shown as its own SCC, which means it's not strongly connected to any other airports.
 
 
 ## Answer to Leading Question 

@@ -10,62 +10,55 @@ using namespace std;
  */
 vector<int> dijkstra(const std::map<int, std::vector<std::pair<ProcessCSV::AirportNode,double> > > &graph, int origin_airport_id, int destination_airport_id, const std::vector<ProcessCSV::AirportNode> & allNodes) {
     // DEFAULT SETUP
-    std::cout << __LINE__ << std::endl;
-    map<int,double> distances; // {neighbor_id, neighbor_distance} Keeps track of distances to each neighbor airport
-    distances.insert({origin_airport_id, 0}); // Set distance to starting point as 0.
-    std::cout << __LINE__ << std::endl;
-    for (auto airport : allNodes) {
-        std::cout << __LINE__ << std::endl;
-        distances.insert({airport.id, INFINITY}); // Distances to all other nodes are INFINITY.
-
-    }
-    std::cout << __LINE__ << std::endl;
     map<int, int> previous; // {previous_airportID, next_airportID} Keeps track of path so we can backtrace later. i.e. Airport1_id -> Airport2_id -> Airport3_id
-    vector<bool> visited(graph.size(), false);
-    std::cout << __LINE__ << std::endl;
+    map<int,double> distances; // {neighbor_id, neighbor_distance} Keeps track of distances to each neighbor airport
+    map<int,bool> visited;
+    for (auto airport : allNodes) {
+        distances.insert({airport.id, INFINITY}); // Distances to all other nodes are INFINITY.
+        visited.insert({airport.id, false}); // Visited set as false.
+    } 
     auto comparator = [](pair<double, int> input1, pair<double, int> input2) { return input1.first > input2.first; };
     priority_queue<pair<double,int>, vector<pair<double,int> >, decltype(comparator) > priorityQueue(comparator); // Priority Queue is needed instead of normal queue so that popping from the top will always give us the node w/ smallest distance.
-    priorityQueue.push({0,origin_airport_id}); // Push starting node into priority queue. Priority Queue: {airport_distance, airport_id}
-    std::cout << __LINE__ << std::endl;
+    
     // TRAVERSAL
-    while (priorityQueue.top().second != destination_airport_id) {
-        std::cout << __LINE__ << std::endl;
+    distances.at(origin_airport_id) = 0; // Set distance to starting point as 0.
+    priorityQueue.push({0,origin_airport_id}); // Push starting node into priority queue. Priority Queue: {airport_distance, airport_id}
+
+    while (priorityQueue.top().second != destination_airport_id && !priorityQueue.empty()) {
         int current_airport = priorityQueue.top().second;
+        visited.at(current_airport) = true;
         priorityQueue.pop(); // Get next best neighbor w shortest distance
         for (auto neighbor_node : graph.at(current_airport)) {
-            std::cout << __LINE__ << std::endl;
             int neighbor = neighbor_node.first.id;
             if (visited[neighbor] == false) {
-                std::cout << __LINE__ << std::endl;
                 double neighbor_cost = distances[current_airport] + neighbor_node.second;
                 if (neighbor_cost < distances[neighbor]) { // Update cumulative distances to neighbor nodes
-                    std::cout << __LINE__ << std::endl;
                     distances[neighbor] = neighbor_cost;
                     priorityQueue.push({distances[neighbor], neighbor}); // Add to PQ. If that neighbor already existed in PQ, this one will simply take precedence and end up popped first.
                     previous[neighbor] = current_airport;
-                    std::cout << __LINE__ << std::endl;
                 }
 
             }
 
         }
-        std::cout << __LINE__ << std::endl;
+
+
         visited[current_airport] = true; // Mark current node as visited. Should not be re-added to PQ
     }
-    std::cout << __LINE__ << std::endl;
+
+    if (distances[destination_airport_id] == INFINITY) {
+        cout << "impossible! no path\n";
+        return vector<int>();
+    }
+
     int backtrace_id = destination_airport_id;
     vector<int> path;
     while (backtrace_id != origin_airport_id) {
-        std::cout << __LINE__ << std::endl;
         path.push_back(backtrace_id);
         backtrace_id = previous[backtrace_id];
     }
-    std::cout << __LINE__ << std::endl;
     path.push_back(origin_airport_id);
-    std::cout << __LINE__ << std::endl;
     reverse(path.begin(), path.end());
-
-    // FINAL RESULT: vector holding airport_id's of traversal in order
     return path;
 }
 
@@ -73,23 +66,21 @@ vector<int> dijkstra(const std::map<int, std::vector<std::pair<ProcessCSV::Airpo
 
 
 /**
- * A star Shortest Path Algorithm
- * This function finds the shortest path from the 1st airport to the 2nd airport.
- * Also accounts for a heuristic--Euclidean distance to end node--when choosing the best next node
+ * Kosaraju Strongly Connected Components
+ * This function creates clusters of airports where in each cluster, any airport has
+ * a possible route to every other airport in that cluster.
  */
 
 // DFS traversal. Records time it found that node. Once finished traversing all its neighbors, add to stack.
+
 void fillOrder(int v, map<int, bool> & visited, stack<int> &Stack, const std::map<int, std::vector<std::pair<ProcessCSV::AirportNode,double> > > &graph)
+
 {
     // Mark the current node as visited
     visited.at(v) = true;
  
     // Recur for all the vertices adjacent to this vertex
-    // cout << "Grabbing neighbors for " << v << endl;
     auto neighbors = graph.at(v);
-    // for (auto n : neighbors) {
-        // cout << n.first.name << endl;
-    // }
     for(auto i = neighbors.begin(); i != neighbors.end(); ++i)
         if(!visited[i->first.id])
             fillOrder(i->first.id, visited, Stack, graph);
@@ -101,7 +92,6 @@ void fillOrder(int v, map<int, bool> & visited, stack<int> &Stack, const std::ma
 std::map<int, std::vector<std::pair<ProcessCSV::AirportNode,double> > > getTranspose(const std::map<int, std::vector<std::pair<ProcessCSV::AirportNode,double> > > &graph, const std::vector<ProcessCSV::AirportNode> & allNodes)
 {
     std::map<int, std::vector<std::pair<ProcessCSV::AirportNode,double> > > graph_transposed;
-    // std::copy(graph.begin(), graph.end(), std::inserter(graph_transposed, graph_transposed.end()));
 
     for (auto airport : allNodes) {
         std::vector<std::pair<ProcessCSV::AirportNode,double>> airportVect;
@@ -123,6 +113,7 @@ std::map<int, std::vector<std::pair<ProcessCSV::AirportNode,double> > > getTrans
 
 // A recursive function to print DFS starting from v
 void dfsUtil(int airport_id, map<int, bool> & visited, const std::map<int, std::vector<std::pair<ProcessCSV::AirportNode,double> > > &graph, vector<int> & connected_component)
+
 {
     // Mark the current node as visited and print it
     visited.at(airport_id) = true;
@@ -130,11 +121,6 @@ void dfsUtil(int airport_id, map<int, bool> & visited, const std::map<int, std::
 
     // Recur for all the vertices adjacent to this vertex
     auto neighbors = graph.at(airport_id);
-    // cout << airport_id << "'s neighbors: ";
-    // for (auto n : neighbors) {
-    //     cout << n.first.id;
-    // }
-    // cout << '\n';
     for (auto i = neighbors.begin(); i != neighbors.end(); ++i)
         if (!visited.at(i->first.id))
             dfsUtil(i->first.id, visited, graph, connected_component);
@@ -143,24 +129,11 @@ void dfsUtil(int airport_id, map<int, bool> & visited, const std::map<int, std::
 
 vector<vector<int>> kosaraju( const std::map<int, std::vector<std::pair<ProcessCSV::AirportNode,double> > > &graph, const std::vector<ProcessCSV::AirportNode> & allNodes) {
     stack<int> Stack;
-    // cout << "Starting Kosaraju" << endl;
-    // for (auto n : allNodes) {
-    //     auto neighbors = graph.at(n.id);
-    //     cout << n.id << "'s neighbors:";
-    //     for (auto p : neighbors) {
-    //         cout << p.first.id;
-    //     }
-    //     cout << '\n';
-    // }
     vector<vector<int>> strongly_connected_components;
     // Mark all the vertices as not visited (For first DFS)
-    map<int, bool> visited; // { airport_id, IsVisited=true/false }
+    map<int, bool> visited;
     for(auto node : allNodes)
         visited.insert({node.id, false});
- 
-    // for (auto const &pair: visited) {
-    //     std::cout << "{" << pair.first << ": " << pair.second << "}\n";
-    // }
     // Fill vertices in stack according to their finishing times
     for (auto node : allNodes)
         if(visited[node.id] == false)

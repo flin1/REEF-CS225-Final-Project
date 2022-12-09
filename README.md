@@ -46,6 +46,7 @@ All code is located in the src directory:
 ## Running Instructions
   - All inputted items will be separated by spaces. Begin command line argument with "./main"
   - Input name graph algorithm you want to use
+  - Input airport names if required
   - Hit "enter" and then run!
   
 Possible Graph Algorithms:

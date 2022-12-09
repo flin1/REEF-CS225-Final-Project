@@ -101,6 +101,7 @@ int main(int numArgs, char *arcv[]) {
                     myfile << "Airport " << i << ": " << id_to_name[item] << std::endl;
                     i++;
                 }
+                myfile << "hi" << std::endl;
                 myfile << "" << std::endl;
                 myfile << "Total Number of Airports (Including Starting and Ending Airports): " << Dij_.size() << std::endl;
             } else {

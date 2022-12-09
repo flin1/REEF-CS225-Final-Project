@@ -127,11 +127,6 @@ int main(int numArgs, char *arcv[]) {
             }
         }
 
-        // if (strcmp(arcv[1], "A-star") == 0) {
-        //     std::cout << "Astar()" << std::endl;
-        //     return 0;
-        // }
-
         myfile.close();
 
     }

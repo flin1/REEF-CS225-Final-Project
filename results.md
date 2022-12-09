@@ -52,7 +52,7 @@ This is an example of finding all the strongly connected components. This will o
 
 
 ## Answer to Leading Question 
-Our Leading Questionwas "How can travelers find the quickest, easiest path from one airport to another?"
+Our Leading Question was "How can travelers find the quickest, easiest path from one airport to another?"
 
 ### Our Discoveries:
 BFS: We discovered that certain airports are useful in getting anywhere around the world. For example, running BFS on "Chicago O'Hare International Airport" returned 3000+ airports in the BFS. This means a traveler can make a safe bet that if they search for tickets from O'Hare, they can get pretty much anywhere they'd like to. In addition, if a user is in an airport such as "Unalaska Airport", they can see what options they have to go to.

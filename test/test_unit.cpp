@@ -106,7 +106,7 @@ TEST_CASE("TestNameToId + IdToName", "[dataparse]") {
 }
 
 
-TEST_CASE("Dijkstras", "[traversal]") {
+TEST_CASE("Dijkstras Small", "[traversal]") {
     ProcessCSV p;
     string filename1 = "test/dummyairports.csv";
     vector<string> tester_data_airport = p.fileToVector(filename1);

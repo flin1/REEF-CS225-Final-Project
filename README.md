@@ -60,7 +60,7 @@ Possible Graph Algorithms:
 
 **Using Dijkstra Algorithm in the Command Line:** ```./main Dijkstra "airport1_name" "airport2_name"```
       
-  * Example: Nadzab Airport and Tofino as our start airport and end airport: ```./main Dijkstra "Nadzab Airport" "Tofino"```
+  * Example: Nadzab Airport and Tofino as our start airport and end airport: ```./main Dijkstra "Thule Air Base" "Kangerlussuaq Airport"```
   
 **Using Kosaraju Algorithm in the Command Line:** ```./main Kosaraju```
 

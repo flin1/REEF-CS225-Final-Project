@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <string.h>
 #include "data_parse.h"
 #include "graph.h"
 #include "BFS.h"
@@ -23,8 +24,8 @@ int main(int numArgs, char *arcv[]) {
         std::cout << "  - Input name graph algorithm you want to use" << std::endl;
         std::cout << "    - Possible Graph Algorithms" << std::endl;
         std::cout << "      - BFS: type \"BFS\", insert only 1 airport name" << std::endl;
-        std::cout << "      - Dijkstra's: type \"Dijkstra\", insert name of 2 airports" << std::endl;
-        std::cout << "      - OTHER ONE: type \"NAME OF OTHER\", insert name of 2 airports" << std::endl;
+        std::cout << "      - Dijkstra: type \"Dijkstra\", insert name of 2 airports" << std::endl;
+        std::cout << "      - Kosaraju: type \"Kosaraju\", no airport input needed" << std::endl;
         std::cout << "  ** If airport names are more than one word, put entire name of an airport inside double quotes" << std::endl;
         std::cout << "  - Hit \"enter\" and then run!" << std::endl;
             
@@ -41,6 +42,11 @@ int main(int numArgs, char *arcv[]) {
         std::cout << "  * using Nadzab Airport and Tofino as our start airport and end airport" << std::endl;
         std::cout << "  ./main Dijkstra \"Philadelphia International Airport\" \"Denver International Airport\"" << std::endl;
         std::cout << "" << std::endl;
+
+        std::cout << "Example of Using Kosuraju Algorithm in the Command Line:" << std::endl;
+        std::cout << "  ./main Kosuraju" << std::endl;
+        std::cout << "" << std::endl;
+
         return 0;
 
     } else {

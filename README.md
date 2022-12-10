@@ -8,7 +8,7 @@ CS225 Final Project FA22
 - Fay Lin
 
 ## Video Presentation 
-[ADD LINK]
+https://www.youtube.com/watch?v=SE6FT2OS1WQ 
 
 ## Project Proposal Document
 
